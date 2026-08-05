@@ -96,7 +96,7 @@ const escalaMotoboys = [
   // Folga: Sábado
   {
     nome: "CALDEIRA",
-    horario: "intermedio",
+    horario: "noite",
     folga: ["sábado"],
     trabDomingo: false,
     trabFeriado: false,
@@ -118,15 +118,43 @@ const escalaMotoboys = [
 ];
 let manha = [];
 let noite = [];
+let inter = [];
+const divsManha = Array.from(document.querySelector(".horariosManha").children);
+const divsNoite = Array.from(document.querySelector(".horariosNoite").children);
+const divsInter = Array.from(document.querySelector(".horariosInter").children);
 escalaMotoboys.forEach((moto) => {
   if (moto.horario == "manhã") {
     manha.push(moto);
-    console.log(moto);
+  } else if (moto.horario == "noite") {
+    noite.push(moto);
+  } else {
+    inter.push(moto);
   }
 
-  if (moto.horario == "noite") {
-    noite.push(moto);
-    console.log(moto);
-  }
+  // if (moto.horario == "noite") {
+  //   noite.push(moto);
+  // }
 });
 
+divsManha.forEach((d) => {
+  manha.forEach((m) => {
+    let newLi = document.createElement("li");
+    newLi.textContent = `${m.nome}`;
+    d.children[0].append(newLi);
+  });
+});
+
+divsNoite.forEach((d) => {
+  noite.forEach((n) => {
+    let newLi = document.createElement("li");
+    newLi.textContent = `${n.nome}`;
+    d.children[0].append(newLi);
+  });
+});
+divsInter.forEach((d) => {
+  inter.forEach((n) => {
+    let newLi = document.createElement("li");
+    newLi.textContent = `${n.nome}`;
+    d.children[0].append(newLi);
+  });
+});
