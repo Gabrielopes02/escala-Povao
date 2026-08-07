@@ -1,45 +1,44 @@
- 
-const escalaMotoboys = [
+ /*const escalaMotoboys = [
   // --- TURNO: MANHÃ ---
   {
     nome: "MARLON",
     horario: "manhã",
-    folga: "terça",
+    folga: 2,
     trabDomingo: [false, "noite"],
     trabFeriado: false,
   },
   {
     nome: "RHAYAM",
     horario: "manhã",
-    folga: "quinta",
+    folga: 4,
     trabDomingo: [false, "noite"],
     trabFeriado: false,
   },
   {
     nome: "THIAGO",
     horario: "manhã",
-    folga: "sexta",
+    folga: 5,
     trabDomingo: [true, "manhã"],
     trabFeriado: false,
   },
   {
     nome: "LUIZ",
     horario: "manhã",
-    folga: "sexta",
+    folga: 5,
     trabDomingo: [true, "manhã"],
     trabFeriado: false, 
   },
   {
     nome: "J VITOR",
     horario: "manhã",
-    folga: "domingo",
+    folga: 3,
     trabDomingo: [true, "manhã"],
     trabFeriado: false,
   },
   {
     nome: "MARCOS",
     horario: "manhã",
-    folga: "domingo",
+    folga: 6,
     trabDomingo: [false, "noite"],
     trabFeriado: false,
   },
@@ -48,14 +47,14 @@ const escalaMotoboys = [
   {
     nome: "SILAS",
     horario: "intermedio",
-    folga: "segunda",
+    folga: 1,
     trabDomingo: [true, "tarde"],
     trabFeriado: false,
   },
   {
     nome: "FABRICIO",
     horario: "intermedio",
-    folga: "terça",
+    folga: 2,
     trabDomingo: [false, "manhã"],
     trabFeriado: false,
   },
@@ -64,53 +63,61 @@ const escalaMotoboys = [
   {
     nome: "RODRIGO",
     horario: "noite",
-    folga: "segunda",
+    folga: 1,
     trabDomingo: [false, "manhã"],
     trabFeriado: false,
   },
   {
     nome: "GABRIEL P",
     horario: "noite",
-    folga: "quarta",
+    folga: 3,
     trabDomingo: [true, "noite"],
     trabFeriado: false,
   },
   {
     nome: "RENAN",
     horario: "noite",
-    folga: "quarta",
+    folga: 3,
     trabDomingo: [true, "noite"],
     trabFeriado: false,
   },
   {
     nome: "HANIEL",
     horario: "noite",
-    folga: "quinta",
+    folga: 4,
     trabDomingo: [false, "noite"],
     trabFeriado: false,
   },
   {
     nome: "ERICK",
     horario: "noite",
-    folga: "sexta",
+    folga: 5,
     trabDomingo: [true, "noite"],
     trabFeriado: false,
   },
   {
     nome: "CALDEIRA",
     horario: "noite",
-    folga: "sábado",
+    folga: 6,
     trabDomingo: [false, "manhã"],
     trabFeriado: false,
   },
   {
     nome: "SADAN",
     horario: "noite",
-    folga: "sábado",
+    folga: 6,
     trabDomingo: [false, "manhã"],
     trabFeriado: false,
   },
-];
+];*/
+const url = "https://wbwlhifqyobcdilrwjog.supabase.co";
+const key =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid2xoaWZxeW9iY2RpbHJ3am9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNDQxNDQsImV4cCI6MjA5ODkyMDE0NH0.3fIMSgxi9eSAf6TPzcCKca243I49gRWJcnpm95GCojY";
+
+const dbSupabase = supabase.createClient(url,key)
+
+
+ 
 
 let manha = [];
 let noite = [];
@@ -118,16 +125,22 @@ let inter = [];
 let trabDomingo = [[],[]]
 
 
-
-
-
 const divsManha = Array.from(document.querySelector(".horariosManha").children);
 const divsNoite = Array.from(document.querySelector(".horariosNoite").children);
 const divsInter = Array.from(document.querySelector(".horariosInter").children);
 
+const divsFolga = Array.from(document.querySelector(".horariosFolga").children)
 
 
-escalaMotoboys.forEach((moto) => {
+
+ const buscarMotoboys = async ()=>{
+   const {data,error}= await dbSupabase.from("escala_motoboys").select("*")
+   return data
+ }
+window.onload = async () => {
+  const escalaMotoboys = await buscarMotoboys();
+  
+    escalaMotoboys.forEach((moto) => {
   if (moto.horario == "manhã") {
     manha.push(moto);
   } else if (moto.horario == "noite") {
@@ -142,14 +155,22 @@ moto.trabDomingo[1]=="manhã"?trabDomingo[0].push(moto):trabDomingo[1].push(moto
 }
 
 });
+
 divsManha.forEach((d,i) => {
 if (divsManha.length-1 == i) {
   
 }else{
   manha.forEach((m) => {
-    let newLi = document.createElement("li");
+    if(d.id==m.folga){
+      
+    }
+    else{
+      let newLi = document.createElement("li");
     newLi.textContent = `${m.nome}`;
     d.children[0].append(newLi);
+      
+    }
+    
   });
 }
 
@@ -158,16 +179,18 @@ if (divsManha.length-1 == i) {
   
   
 divsNoite.forEach((d,i) => {
-  if(divsNoite.length-1 == i){
-   
-  }
+  if(divsNoite.length-1 == i){}
   else{
-    
     noite.forEach((n) => {
+    
+    if(d.id==n.folga){}
+    else{
     
     let newLi = document.createElement("li");
     newLi.textContent = `${n.nome}`;
     d.children[0].append(newLi);
+    }
+    
   });
   }
 });
@@ -197,4 +220,26 @@ trabDomingo.forEach((turnos,i)=>{
     
   })
 })
-   console.log(divsManha[6])
+   
+  divsFolga.forEach( d=>{
+  escalaMotoboys.forEach(m=>{
+  if(d.id==m.folga){
+    let newLi = document.createElement('li')
+
+    newLi.textContent=`${m.nome}`
+    d.children[0].append(newLi)
+  }
+  })
+})
+
+};
+ 
+
+const mudarEscala=async()=>{
+  await mudarFolga()
+}
+const mudarFolga=async()=>{
+  const {data,error}= await dbSupabase.from("escala_motoboys").update({horario : "manhã"}).in("id",[1]).select()
+  console.log(data)
+}
+mudarFolga()
