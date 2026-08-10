@@ -135,6 +135,7 @@ const buscarMotoboys = async () => {
 
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
+  console.log(escalaMotoboys)
   escalaMotoboys.forEach((moto) => {
     if (moto.horario == "manhã") {
       manha.push(moto);
@@ -151,12 +152,11 @@ window.onload = async () => {
     }
     let auxidAndFolgas = [];
     auxidAndFolgas.push(moto.id);
-    auxidAndFolgas.push(moto.folga);
+    auxidAndFolgas.push(Number(moto.folga));
     idAndFolgas.push(auxidAndFolgas);
     auxidAndFolgas = [];
   });
-  console.log(escalaMotoboys);
-  console.log(idAndFolgas);
+ 
   divsManha.forEach((d, i) => {
     if (divsManha.length - 1 == i) {
     } else {
@@ -222,7 +222,8 @@ const mudarEscala = async () => {
   // await manhaToNoite();
   // await noiteToManha();
   // location.reload()
-  changeFolga();
+  //changeFolga();
+  
 };
 const manhaToNoite = async () => {
   const idManha = manha.map((moto) => moto.id);
@@ -241,6 +242,18 @@ const noiteToManha = async () => {
     .select();
 };
 
-const changeFolga = () => {
-  const folgasChanged = console.log(changeFolga);
-};
+const changeFolga = async  () => {
+  
+   
+   let folgachanged= idAndFolgas.map(([id,folga])=>[id,folga==1?6:folga-1])
+   
+   for(const [id,folga] of folgachanged){
+     
+     const {data,error}= await dbSupabase.from('escala_motoboys').update({folga:folga}).eq('id',id).select()
+     console.log(data)
+   }
+   
+}
+const changeSunday =  ()=>{
+  
+}
