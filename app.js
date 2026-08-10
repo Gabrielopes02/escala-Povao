@@ -1,4 +1,4 @@
- /*const escalaMotoboys = [
+/*const escalaMotoboys = [
   // --- TURNO: MANHÃ ---
   {
     nome: "MARLON",
@@ -140,7 +140,7 @@ const divsFolga = Array.from(document.querySelector(".horariosFolga").children)
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
   
-    escalaMotoboys.forEach((moto) => {
+   escalaMotoboys.forEach((moto) => {
   if (moto.horario == "manhã") {
     manha.push(moto);
   } else if (moto.horario == "noite") {
@@ -149,7 +149,7 @@ window.onload = async () => {
     inter.push(moto);
   }
   
-if(moto.trabDomingo[0]){
+if(moto.trabDomingo[0]=== "true"){
 moto.trabDomingo[1]=="manhã"?trabDomingo[0].push(moto):trabDomingo[1].push(moto)
   
 }
@@ -221,7 +221,7 @@ trabDomingo.forEach((turnos,i)=>{
   })
 })
    
-  divsFolga.forEach( d=>{
+ divsFolga.forEach( d=>{
   escalaMotoboys.forEach(m=>{
   if(d.id==m.folga){
     let newLi = document.createElement('li')
@@ -236,10 +236,27 @@ trabDomingo.forEach((turnos,i)=>{
  
 
 const mudarEscala=async()=>{
-  await mudarFolga()
+await  manhaToNoite()
+await noiteToManha()
+tiriri()
 }
-const mudarFolga=async()=>{
-  const {data,error}= await dbSupabase.from("escala_motoboys").update({horario : "manhã"}).in("id",[1]).select()
+const manhaToNoite=async ()=>{
+  
+  const idManha = manha.map(moto=>moto.id)
+  const {data,error} = await dbSupabase.from("escala_motoboys").update({horario:"noite"}).in("id",idManha).select()
   console.log(data)
+  
 }
-mudarFolga()
+const noiteToManha = async ()=>{
+  const idNoite = noite.map(moto=>moto.id)
+  const {data,error}= await dbSupabase.from("escala_motoboys").update({horario:'manhã'}).in('id',idNoite).select()
+  console.log('dados noite para manha',data)
+}
+
+
+const tiriri =()=>{
+  const idTiriri=inter.map(moto=>moto.horario == "tiriri")
+  console.log(idTiriri)
+}
+
+ 
