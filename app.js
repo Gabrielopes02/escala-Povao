@@ -120,6 +120,11 @@ let manha = [];
 let noite = [];
 let inter = [];
 let trabDomingo = [[], []];
+let trabDomingo2 =[[],[]]
+let idTrabDom0Manha=[]
+let idTrabDom0Noite=[]
+let idTrabDom1Manha=[]
+let idTrabDom1Noite=[]
 let idAndFolgas = [];
 
 const divsManha = Array.from(document.querySelector(".horariosManha").children);
@@ -135,7 +140,7 @@ const buscarMotoboys = async () => {
 
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
-  console.log(escalaMotoboys)
+  
   escalaMotoboys.forEach((moto) => {
     if (moto.horario == "manhã") {
       manha.push(moto);
@@ -145,18 +150,24 @@ window.onload = async () => {
       inter.push(moto);
     }
 
-    if (moto.trabDomingo[0] === "true") {
-      moto.trabDomingo[1] == "manhã"
+    if (moto.trabDomingo[1] === "true") {
+      moto.trabDomingo[0] == "manhã"
         ? trabDomingo[0].push(moto)
         : trabDomingo[1].push(moto);
+    }else{
+      moto.trabDomingo[0]=="manhã"? trabDomingo2[0].push(moto):trabDomingo2[1].push(moto)
     }
+    
+    
+    
+    
     let auxidAndFolgas = [];
     auxidAndFolgas.push(moto.id);
     auxidAndFolgas.push(Number(moto.folga));
     idAndFolgas.push(auxidAndFolgas);
     auxidAndFolgas = [];
   });
- 
+    
   divsManha.forEach((d, i) => {
     if (divsManha.length - 1 == i) {
     } else {
@@ -195,7 +206,7 @@ window.onload = async () => {
       });
     }
   });
-
+//colocar na tabela
   trabDomingo.forEach((turnos, i) => {
     turnos.forEach((moto) => {
       let newLi = document.createElement("li");
@@ -216,15 +227,57 @@ window.onload = async () => {
       }
     });
   });
-};
+ 
+}
 
-const mudarEscala = async () => {
+const mudarEscala =  async() => {
   // await manhaToNoite();
   // await noiteToManha();
   // location.reload()
   //changeFolga();
   
+  let mudancas=[]
+  
+  trabDomingo[0].forEach(m=>{
+    const obj={
+      id:m.id,
+      nome:m.nome,
+      trabDomingo:["noite",false]
+    }
+    mudancas.push(obj)
+  })
+  trabDomingo[1].forEach(m=>{
+    const obj= {
+      id:m.id,
+      nome:m.nome,
+      trabDomingo:["manhã",false]
+    }
+    mudancas.push(obj)
+  })
+  trabDomingo2[0].forEach(m=>{
+    const obj = {
+      id:m.id,
+      nome:m.nome,
+      trabDomingo:["manhã",true]
+    }
+    mudancas.push(obj)
+  })
+  trabDomingo2[1].forEach(m=>{
+    const obj={
+      id:m.id,
+      nome:m.nome,
+      trabDomingo:["noite",true]
+    }
+    mudancas.push(obj)
+  })
+  
+  const {data,error}=await dbSupabase.from('escala_motoboys').upsert(mudancas).select()
+  console.log(data)
+  console.log(error)
+  location.reload()
 };
+
+
 const manhaToNoite = async () => {
   const idManha = manha.map((moto) => moto.id);
   const { data, error } = await dbSupabase
@@ -242,18 +295,6 @@ const noiteToManha = async () => {
     .select();
 };
 
-const changeFolga = async  () => {
   
-   
-   let folgachanged= idAndFolgas.map(([id,folga])=>[id,folga==1?6:folga-1])
-   
-   for(const [id,folga] of folgachanged){
-     
-     const {data,error}= await dbSupabase.from('escala_motoboys').update({folga:folga}).eq('id',id).select()
-     console.log(data)
-   }
-   
-}
-const changeSunday =  ()=>{
-  
-}
+
+        
