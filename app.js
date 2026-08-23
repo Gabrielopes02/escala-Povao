@@ -26,6 +26,11 @@ const buscarMotoboys = async () => {
   return data;
 };
 
+
+
+//cu cabecudo
+
+const testeteste ='laraririri'
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
 
