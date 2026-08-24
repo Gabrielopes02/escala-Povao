@@ -15,12 +15,14 @@ let idTrabDom1Manha = [];
 let idTrabDom1Noite = [];
 let idAndFolgas = [];
 
-const divsManha = Array.from(document.querySelector(".horariosManha").children);
+
+const ulManha = Array.from(document.querySelectorAll(".ulManha"));
+/*
 const divsNoite = Array.from(document.querySelector(".horariosNoite").children);
 const divsInter = Array.from(document.querySelector(".horariosInter").children);
 
 const divsFolga = Array.from(document.querySelector(".horariosFolga").children);
-
+*/
 const buscarMotoboys = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
   return data;
@@ -28,9 +30,6 @@ const buscarMotoboys = async () => {
 
 
 
-//cu cabecudo
-
-const testeteste ='laraririri'
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
 
@@ -60,20 +59,20 @@ window.onload = async () => {
     auxidAndFolgas = [];
   });
 
-  divsManha.forEach((d, i) => {
-    if (divsManha.length - 1 == i) {
-    } else {
-      manha.forEach((m) => {
-        if (d.id == m.folga) {
-        } else {
-          let newLi = document.createElement("li");
-          newLi.textContent = `${m.nome}`;
-          d.children[0].append(newLi);
-        }
-      });
-    }
-  });
+  ulManha.forEach((d, i) =>{ 
+    manha.forEach(m=>{
+      
+    console.log(d.id)
+    if(d.id !== m.folga){
+      
+  const newLi = document.createElement('li')
+   newLi.innerHTML=`<div class="flex gap-3"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`
+   d.append(newLi)
 
+    }
+      
+    })});
+/*
   divsNoite.forEach((d, i) => {
     if (divsNoite.length - 1 == i) {
     } else {
@@ -119,6 +118,7 @@ window.onload = async () => {
       }
     });
   });
+  */
 };
 
 const mudarEscala = async () => {
