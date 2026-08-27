@@ -15,11 +15,13 @@ let idTrabDom1Manha = [];
 let idTrabDom1Noite = [];
 let idAndFolgas = [];
 
-
 const ulManha = Array.from(document.querySelectorAll(".ulManha"));
+const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
+const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
+const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
 /*
 const divsNoite = Array.from(document.querySelector(".horariosNoite").children);
-const divsInter = Array.from(document.querySelector(".horariosInter").children);
+
 
 const divsFolga = Array.from(document.querySelector(".horariosFolga").children);
 */
@@ -27,8 +29,6 @@ const buscarMotoboys = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
   return data;
 };
-
-
 
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
@@ -58,45 +58,58 @@ window.onload = async () => {
     idAndFolgas.push(auxidAndFolgas);
     auxidAndFolgas = [];
   });
-
-  ulManha.forEach((d, i) =>{ 
-    manha.forEach(m=>{
-      
-    console.log(d.id)
-    if(d.id !== m.folga){
-      
-  const newLi = document.createElement('li')
-   newLi.innerHTML=`<div class="flex gap-3"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`
-   d.append(newLi)
-
-    }
-      
-    })});
-/*
-  divsNoite.forEach((d, i) => {
-    if (divsNoite.length - 1 == i) {
-    } else {
-      noite.forEach((n) => {
-        if (d.id == n.folga) {
-        } else {
-          let newLi = document.createElement("li");
-          newLi.textContent = `${n.nome}`;
-          d.children[0].append(newLi);
-        }
-      });
-    }
+  inter.push({ nome: "Virtualista" });
+  
+  ulManha.forEach((d, i) => {
+    manha.forEach((m) => {
+      if (d.id !== m.folga) {
+        const newLi = document.createElement("li");
+        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
+        d.append(newLi);
+      }
+    });
+  });
+  ulTarde.forEach((d, i) => {
+    inter.forEach((m) => {
+      if (d.id !== m.folga) {
+        const newLi = document.createElement("li");
+        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
+        d.append(newLi);
+      }
+    });
   });
 
-  divsInter.forEach((d, i) => {
-    if (divsInter.length - 1 == i) {
-    } else {
-      inter.forEach((n) => {
+  ulNoite.forEach((d, i) => {
+    noite.forEach((m) => {
+      if (d.id !== m.folga) {
+        const newLi = document.createElement("li");
+        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
+        d.append(newLi);
+      }
+    });
+  });
+  ulFolgas.forEach((d, i) => {
+    escalaMotoboys.forEach((m) => {
+      if (d.id == m.folga) {
         let newLi = document.createElement("li");
-        newLi.textContent = `${n.nome}`;
-        d.children[0].append(newLi);
-      });
-    }
+        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
+
+        d.append(newLi);
+      }
+    });
   });
+  /*
+  divsFolga.forEach((d) => {
+    escalaMotoboys.forEach((m) => {
+      if (d.id == m.folga) {
+        let newLi = document.createElement("li");
+
+        newLi.textContent = `${m.nome}`;
+        d.children[0].append(newLi);
+      }
+    });
+  });
+
   //colocar na tabela
   trabDomingo.forEach((turnos, i) => {
     turnos.forEach((moto) => {
@@ -108,16 +121,7 @@ window.onload = async () => {
     });
   });
 
-  divsFolga.forEach((d) => {
-    escalaMotoboys.forEach((m) => {
-      if (d.id == m.folga) {
-        let newLi = document.createElement("li");
-
-        newLi.textContent = `${m.nome}`;
-        d.children[0].append(newLi);
-      }
-    });
-  });
+ 
   */
 };
 
@@ -175,7 +179,6 @@ const mudarEscala = async () => {
   // console.log(data)
   // console.log(error)
   // location.reload()
-  
 };
 
 const escalaAnterior = () => {};
