@@ -19,12 +19,10 @@ const ulManha = Array.from(document.querySelectorAll(".ulManha"));
 const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
 const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
 const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
-/*
-const divsNoite = Array.from(document.querySelector(".horariosNoite").children);
 
 
-const divsFolga = Array.from(document.querySelector(".horariosFolga").children);
-*/
+
+
 const buscarMotoboys = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
   return data;
@@ -75,6 +73,8 @@ window.onload = async () => {
         const newLi = document.createElement("li");
         newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
         d.append(newLi);
+       
+
       }
     });
   });
@@ -98,17 +98,21 @@ window.onload = async () => {
       }
     });
   });
-  /*
-  divsFolga.forEach((d) => {
-    escalaMotoboys.forEach((m) => {
-      if (d.id == m.folga) {
-        let newLi = document.createElement("li");
+  
 
-        newLi.textContent = `${m.nome}`;
-        d.children[0].append(newLi);
-      }
-    });
-  });
+  trabDomingo.forEach((turnos,i)=>{
+    const divManha =document.querySelector("#ulManhaDom")
+    const divNoite = document.querySelector("#ulNoiteDom")
+    turnos.forEach(moto=>{
+      let newLi = document.createElement("li")
+      newLi.innerHTML= `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${moto.nome}</div>`
+      
+      
+     i==0? divManha.append(newLi):divNoite.append(newLi)
+    })})
+  
+  /*
+  
 
   //colocar na tabela
   trabDomingo.forEach((turnos, i) => {
