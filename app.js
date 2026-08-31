@@ -14,6 +14,7 @@ let idTrabDom0Noite = [];
 let idTrabDom1Manha = [];
 let idTrabDom1Noite = [];
 let idAndFolgas = [];
+const mudarletra =""
 
 const ulManha = Array.from(document.querySelectorAll(".ulManha"));
 const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
@@ -30,7 +31,6 @@ const buscarMotoboys = async () => {
 
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
-
   escalaMotoboys.forEach((moto) => {
     if (moto.horario == "manhã") {
       manha.push(moto);
@@ -39,7 +39,7 @@ window.onload = async () => {
     } else {
       inter.push(moto);
     }
-
+    
     if (moto.trabDomingo[1] === "true") {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo[0].push(moto)
@@ -48,6 +48,10 @@ window.onload = async () => {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo2[0].push(moto)
         : trabDomingo2[1].push(moto);
+    }
+    
+    if(moto.nome == "Mudar Escala"){
+      mudarLetra = moto
     }
 
     let auxidAndFolgas = [];
@@ -98,8 +102,6 @@ window.onload = async () => {
       }
     });
   });
-  
-
   trabDomingo.forEach((turnos,i)=>{
     const divManha =document.querySelector("#ulManhaDom")
     const divNoite = document.querySelector("#ulNoiteDom")
@@ -109,28 +111,13 @@ window.onload = async () => {
       
       
      i==0? divManha.append(newLi):divNoite.append(newLi)
-    })})
-  
-  /*
-  
-
-  //colocar na tabela
-  trabDomingo.forEach((turnos, i) => {
-    turnos.forEach((moto) => {
-      let newLi = document.createElement("li");
-      newLi.textContent = `${moto.nome}`;
-      i == 0
-        ? divsManha[6].children[0].append(newLi)
-        : divsNoite[6].children[0].append(newLi);
-    });
-  });
-
- 
-  */
-};
+    })})};
 
 const mudarEscala = async () => {
   let mudancas = [];
+  
+  
+  
   trabDomingo[0].forEach((m) => {
     const obj = {
       id: m.id,
@@ -167,6 +154,8 @@ const mudarEscala = async () => {
   const idManha = manha.map((moto) => moto.id);
   const idNoite = noite.map((moto) => moto.id);
   mudancas.forEach((m) => {
+    
+    if(mudarLetra.trabFeriado){
     idManha.forEach((id) => {
       if (id == m.id) {
         m.horario = "noite";
@@ -176,13 +165,20 @@ const mudarEscala = async () => {
       if (id == m.id) {
         m.horario = "manhã";
       }
-    });
+    })};
   });
-
-  // const {data,error}=await dbSupabase.from('escala_motoboys').upsert(mudancas).select()
-  // console.log(data)
-  // console.log(error)
-  // location.reload()
+   
+   console.log(mudancas)
+   const {data,error}=await dbSupabase.from('escala_motoboys').upsert(mudancas).select()
+   const {data,error} =await dbSupabase.from('escala_Motoboys').update({
+     nome: "Mudar Letra",trabFeriado:!
+   })
+  console.log(data)
+  console.log(error)
+  //location.reload()
 };
 
-const escalaAnterior = () => {};
+const escalaAnterior = () => {
+      console.log(!mudarLetra.trabFeriado)
+
+};
