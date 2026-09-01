@@ -45,7 +45,7 @@ window.onload = async () => {
         : trabDomingo[1].push(moto);
     } else if (moto.trabDomingo[0] == "não se aplica") {
       
-    } else {
+    } else {  
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo2[0].push(moto)
         : trabDomingo2[1].push(moto);
@@ -61,7 +61,7 @@ window.onload = async () => {
     idAndFolgas.push(auxidAndFolgas);
     auxidAndFolgas = [];
   });
-  inter.push({ nome: "Virtualista" });
+  inter.push({ nome: "Virtualista" });  
 
   ulManha.forEach((d, i) => {
     manha.forEach((m) => {
@@ -168,18 +168,19 @@ const mudarEscala = async () => {
     }
     
     if(m.id == 16){
-  m.trabFeriado = ["nao se aplica","nao se aplica"]}
+  m.trabDomingo = ["nao se aplica","nao se aplica"]}
+    m.trabFeriado = !mudarLetra.trabFeriado
   });
 
-  //const { data, error } = await dbSupabase
-   // .from("escala_motoboys")
-    //.upsert(mudancas)
-    //.select();
+  const { data, error } = await dbSupabase
+    .from("escala_motoboys")
+    .upsert(mudancas)
+    .select();
 
   //console.log(data);
   //console.log(error);
   console.log(mudancas)
-   //location.reload();
+   location.reload();
 };
 
 const escalaAnterior = () => {
