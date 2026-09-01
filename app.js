@@ -14,15 +14,12 @@ let idTrabDom0Noite = [];
 let idTrabDom1Manha = [];
 let idTrabDom1Noite = [];
 let idAndFolgas = [];
-const mudarletra =""
+const mudarletra = "";
 
 const ulManha = Array.from(document.querySelectorAll(".ulManha"));
 const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
 const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
 const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
-
-
-
 
 const buscarMotoboys = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
@@ -36,10 +33,13 @@ window.onload = async () => {
       manha.push(moto);
     } else if (moto.horario == "noite") {
       noite.push(moto);
-    } else {
+    } else if(moto.horario == "inter"){
       inter.push(moto);
     }
-    
+    if (moto.id == 16) {
+      mudarLetra = moto;
+    }
+    console.log(escalaMotoboys);
     if (moto.trabDomingo[1] === "true") {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo[0].push(moto)
@@ -49,9 +49,9 @@ window.onload = async () => {
         ? trabDomingo2[0].push(moto)
         : trabDomingo2[1].push(moto);
     }
-    
-    if(moto.nome == "Mudar Escala"){
-      mudarLetra = moto
+
+    if (moto.nome == "Mudar Escala") {
+      mudarLetra = moto;
     }
 
     let auxidAndFolgas = [];
@@ -61,12 +61,12 @@ window.onload = async () => {
     auxidAndFolgas = [];
   });
   inter.push({ nome: "Virtualista" });
-  
+
   ulManha.forEach((d, i) => {
     manha.forEach((m) => {
       if (d.id !== m.folga) {
         const newLi = document.createElement("li");
-        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
+        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
         d.append(newLi);
       }
     });
@@ -77,8 +77,6 @@ window.onload = async () => {
         const newLi = document.createElement("li");
         newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
         d.append(newLi);
-       
-
       }
     });
   });
@@ -102,22 +100,21 @@ window.onload = async () => {
       }
     });
   });
-  trabDomingo.forEach((turnos,i)=>{
-    const divManha =document.querySelector("#ulManhaDom")
-    const divNoite = document.querySelector("#ulNoiteDom")
-    turnos.forEach(moto=>{
-      let newLi = document.createElement("li")
-      newLi.innerHTML= `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${moto.nome}</div>`
-      
-      
-     i==0? divManha.append(newLi):divNoite.append(newLi)
-    })})};
+  trabDomingo.forEach((turnos, i) => {
+    const divManha = document.querySelector("#ulManhaDom");
+    const divNoite = document.querySelector("#ulNoiteDom");
+    turnos.forEach((moto) => {
+      let newLi = document.createElement("li");
+      newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${moto.nome}</div>`;
+
+      i == 0 ? divManha.append(newLi) : divNoite.append(newLi);
+    });
+  });
+};
 
 const mudarEscala = async () => {
   let mudancas = [];
-  
-  
-  
+
   trabDomingo[0].forEach((m) => {
     const obj = {
       id: m.id,
@@ -154,31 +151,30 @@ const mudarEscala = async () => {
   const idManha = manha.map((moto) => moto.id);
   const idNoite = noite.map((moto) => moto.id);
   mudancas.forEach((m) => {
-    
-    if(mudarLetra.trabFeriado){
-    idManha.forEach((id) => {
-      if (id == m.id) {
-        m.horario = "noite";
-      }
-    });
-    idNoite.forEach((id) => {
-      if (id == m.id) {
-        m.horario = "manhã";
-      }
-    })};
+    if (mudarLetra.trabFeriado) {
+      idManha.forEach((id) => {
+        if (id == m.id) {
+          m.horario = "noite";
+        }
+      });
+      idNoite.forEach((id) => {
+        if (id == m.id) {
+          m.horario = "manhã";
+        }
+      });
+    }
   });
-   
-   console.log(mudancas)
-   const {data,error}=await dbSupabase.from('escala_motoboys').upsert(mudancas).select()
-   const {data,error} =await dbSupabase.from('escala_Motoboys').update({
-     nome: "Mudar Letra",trabFeriado:!
-   })
-  console.log(data)
-  console.log(error)
+
+  const { data, error } = await dbSupabase
+    .from("escala_motoboys")
+    .upsert(mudancas)
+    .select();
+
+  console.log(data);
+  console.log(error);
   //location.reload()
 };
 
 const escalaAnterior = () => {
-      console.log(!mudarLetra.trabFeriado)
-
+  console.log(mudarLetra);
 };

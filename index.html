@@ -19,250 +19,230 @@
   </head>
   <body
     class="w-screen h-screen flex items-center justify-center font-['Poppins'] bg-blue-300">
-    <section class="w-7/8 h-7/8">
+    <section class="h-full w-full p-5 flex flex-col items-center">
       <!-- escala povao -->
-      <div class="w-full flex justify-center bg-yellow-300 mb-2">
+      <div class="flex justify-center bg-yellow-300 mb-2 w-full">
         escalas Povão
       </div>
-      <div class="w-full flex justify-between mb-2">
-        <button class=" rounded p-1  bg-blue-900 text-yellow-500" onclick="escalaAnterior()">Anterior</button>
-        <button class=" rounded p-1 text-yellow-500 bg-blue-900" onclick="mudarEscala()">Próximo</button>
 
-
+      <div class="flex justify-between mb-2 w-full">
+        <button
+          class="rounded p-1 bg-blue-900 text-yellow-500"
+          onclick="escalaAnterior()">
+          Anterior
+        </button>
+        <button
+          class="rounded p-1 text-yellow-500 bg-blue-900"
+          onclick="mudarEscala()">
+          Próximo
+        </button>
       </div>
-      <!-- content -->
-      <div class="h-full flex gap-2">
-        <!-- colums -->
-        <!-- column 1 -->
-        <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 text-yellow-500 rounded-t-xl w-full">
-            Horário
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
+
+      <div class="flex flex-col gap-2">
+        <div class="flex gap-2">
+          <!-- linha da Manhã -->
+          <div class="flex flex-col">
             <div
-              class="h-4/10 flex items-center justify-center bg-pink-100 rounded-b-xl">
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl min-w-20">
+              horario
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
               Manhã
             </div>
+          </div>
+          <div>
             <div
-              class="h-2/10 flex flex-col items-center justify-between p-2 bg-pink-100 rounded-xl p-10">
-              <div>
-               <p>9:40 H</p>
-              <p>10:00 H</p>
-              </div>
-              <div>
-                11:00 H
-              </div>
+              class="flex justify-center items-center bg-blue-900 rounded-t-xl py-2">
+              <p class="text-yellow-500">Segunda</p>
             </div>
             <div
-              class="h-4/10 flex items-center justify-center bg-pink-100 rounded-xl mb-2">
+              class="flex items-start justify-center bg-white rounded-b-xl p-2 w-35">
+              <ul
+                class="ulManha flex flex-col justify-start gap-1 h-full"
+                id="1"></ul>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35">
+              Terça
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
+              <ul
+                class="ulManha flex flex-col justify-start gap-1 h-full"
+                id="2"></ul>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35">
+              Quarta
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
+              <ul
+                class="ulManha flex flex-col justify-start gap-1 h-full"
+                id="3"></ul>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35">
+              Quinta
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
+              <ul
+                class="ulManha flex flex-col justify-start gap-1 h-full"
+                id="4"></ul>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35">
+              Sexta
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
+              <ul
+                class="ulManha flex flex-col justify-start gap-1 h-full"
+                id="5"></ul>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35">
+              Sábado
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
+              <ul
+                class="ulManha flex flex-col justify-start gap-1 h-full"
+                id="6"></ul>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <div
+              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35">
+              Domingo
+            </div>
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
+              <ul
+                class="flex flex-col justify-start gap-1 h-full"
+                id="ulManhaDom"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <!-- linha da tarde -->
+          <div class="flex flex-col">
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
+              Tarde
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul class="ulTarde flex flex-col justify-start gap-1" id="1"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul class="ulTarde flex flex-col justify-start gap-1" id="2"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35">
+              <ul
+                class="ulTarde flex flex-col justify-start gap-1 h-full"
+                id="3"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul class="ulTarde flex flex-col justify-start gap-1" id="4"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-start gap-1 h-full"
+                id="5"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-start gap-1 h-full"
+                id="6"></ul>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul class="flex flex-col justify-start gap-1 h-full" id=""></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-2">
+          <!-- linha da noite -->
+          <div class="flex flex-col">
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
               Noite
             </div>
           </div>
-          <div
-            class="h-41 flex items-center justify-center bg-pink-100 w-full rounded-xl p-1">
-            Folgas
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulNoite flex flex-col justify-start gap-1"
+                id="1"></ul>
+            </div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulNoite flex flex-col justify-start gap-1 h-full"
+                id="1"></ul>
+            </div>
           </div>
         </div>
-        <!-- column-2 -->
-        <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Segunda</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
+        <div class="flex gap-2">
+          <!-- linha da tarde -->
+          <div class="flex flex-col">
             <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class="ulManha flex flex-col justify-start gap-1" id="1"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class="ulTarde flex flex-col gap-2" id="1"></ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class="ulNoite flex flex-col gap-2" id="1"></ul>
+              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
+              Folgas
             </div>
           </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id="1"></ul>
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1 h-full"
+                id="1"></ul>
+            </div>
           </div>
         </div>
-        <!-- column 3 -->
-        <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Terça</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class="ulManha flex flex-col justify-start gap-1" id="2"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class="ulTarde flex flex-col justify-start gap-2" id="2">
-                
-              </ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class="ulNoite flex flex-col gap-2" id="2"></ul>
-            </div>
-          </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id="2"></ul>
-          </div>
-        </div>
-        <!-- column 4 -->
-                <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Quarta</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class="ulManha flex flex-col justify-start gap-1" id="3"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class="ulTarde flex flex-col justify-start gap-2" id="3">
-                
-              </ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class="ulNoite flex flex-col gap-2" id="3"></ul>
-            </div>
-          </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id="3"></ul>
-          </div>
-        </div>
-
-        <!-- column 5 -->
-                        <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Quinta</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class="ulManha flex flex-col justify-start gap-1" id="4"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class="ulTarde flex flex-col justify-start gap-2" id="4">
-                
-              </ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class="ulNoite flex flex-col gap-2" id="4"></ul>
-            </div>
-          </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id="4"></ul>
-          </div>
-        </div>
-
-        <!-- column 6 -->
-        
-       <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Sexta</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class="ulManha flex flex-col justify-start gap-1" id="5"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class="ulTarde flex flex-col justify-start gap-2" id="5">
-                
-              </ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class="ulNoite flex flex-col gap-2" id="5"></ul>
-            </div>
-          </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id="5"></ul>
-          </div>
-        </div>
-
-
-        <!-- column 7 -->
-
-       <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Sábado</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class="ulManha flex flex-col justify-start gap-1" id="6"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class="ulTarde flex flex-col justify-start gap-2" id="6">
-                
-              </ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class="ulNoite flex flex-col gap-2" id="6"></ul>
-            </div>
-          </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id="6"></ul>
-          </div>
-        </div>
-
-
-        <!-- column 8-->
-
-               <div class="w-1/8 h-full flex flex-col justify-between items-center">
-          <div
-            class="h-15 flex justify-center items-center bg-blue-900 rounded-t-xl w-full">
-            <p class="text-yellow-500">Sábado</p>
-          </div>
-          <div class="h-full w-full flex flex-col gap-2">
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-b-xl pt-2">
-              <ul class=" flex flex-col justify-start gap-1" id="ulManhaDom"></ul>
-            </div>
-            <div
-              class="h-2/10 flex items-start justify-center bg-pink-100 rounded-xl p-2">
-              <ul class=" flex flex-col justify-start gap-2" id="6">
-                
-              </ul>
-            </div>
-            <div
-              class="h-4/10 flex items-start justify-center bg-pink-100 rounded-xl mb-2 pt-2">
-              <ul class=" flex flex-col gap-2" id="ulNoiteDom"></ul>
-            </div>
-          </div>
-          <div
-            class="h-40 flex items-start justify-center bg-pink-100 w-full rounded-xl p-2">
-            <ul class="ulFolgas flex flex-col gap-1" id=""></ul>
-          </div>
-        </div>
-
       </div>
     </section>
+
     <script src="app.js"></script>
   </body>
 </html>
