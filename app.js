@@ -164,7 +164,13 @@ const mudarEscala = async () => {
       });
     }
   });
+  const obj = {
+    nome: mudarLetra.nome,
+    id: 16,
+    trabFeriado: !mudarLetra.trabFeriado,
+  };
 
+  mudancas.push(obj);
   const { data, error } = await dbSupabase
     .from("escala_motoboys")
     .upsert(mudancas)
@@ -172,7 +178,7 @@ const mudarEscala = async () => {
 
   console.log(data);
   console.log(error);
-  location.reload();
+   location.reload();
 };
 
 const escalaAnterior = () => {
