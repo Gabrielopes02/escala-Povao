@@ -39,8 +39,8 @@
       </div>
 
       <div class="flex flex-col gap-2">
+        <!-- linha da Manhã -->
         <div class="flex gap-2">
-          <!-- linha da Manhã -->
           <div class="flex flex-col">
             <div
               class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl min-w-20">
@@ -48,19 +48,17 @@
             </div>
             <div
               class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl">
-              Manhã
+              <p class="border-b-2">Manhã</p>
             </div>
           </div>
-          <div>
+          <div class="flex flex-col">
             <div
-              class="flex justify-center items-center bg-blue-900 rounded-t-xl py-2">
+              class="flex justify-center items-center bg-blue-900 rounded-t-xl py-2 w-35">
               <p class="text-yellow-500">Segunda</p>
             </div>
             <div
-              class="flex items-start justify-center bg-white rounded-b-xl p-2 w-35">
-              <ul
-                class="ulManha flex flex-col justify-start gap-1 h-full"
-                id="1"></ul>
+              class="flex items-start justify-center bg-white rounded-b-xl p-2 h-full">
+              <ul class="ulManha flex flex-col justify-start gap-1" id="1"></ul>
             </div>
           </div>
           <div class="flex flex-col">
@@ -137,33 +135,110 @@
             </div>
           </div>
         </div>
+        <!-- linha da tarde -->
         <div class="flex gap-2">
           <!-- linha da tarde -->
           <div class="flex flex-col">
+            <!-- column 1 -->
+            <div
+              class="flex flex-col items-center justify-between p-2 bg-white h-full rounded-xl min-w-20">
+              <p class="border-b-2">9h40</p>
+              <p class="border-b-2">10h00</p>
+              <p class="border-b-2">11h00</p>
+            </div>
+          </div>
+          <!-- column2 -->
+          <div>
+            <div
+              class="flex justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-between gap-1"
+                id="1"></ul>
+            </div>
+          </div>
+          <!-- column3 -->
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-between gap-1"
+                id="2"></ul>
+            </div>
+          </div>
+          <!-- column4 -->
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-between gap-1 h-full"
+                id="3"></ul>
+            </div>
+          </div>
+          <!-- column5 -->
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-between gap-1"
+                id="4"></ul>
+            </div>
+          </div>
+          <!-- column6 -->
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-between gap-1 h-full"
+                id="5"></ul>
+            </div>
+          </div>
+          <!-- column7 -->
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulTarde flex flex-col justify-between gap-1 h-full"
+                id="6"></ul>
+            </div>
+          </div>
+
+          <!-- column8 -->
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul class="flex flex-col justify-between gap-1 h-full" id=""></ul>
+            </div>
+          </div>
+        </div>
+        <!-- linha da noite -->
+        <div class="flex gap-2">
+          <div class="flex flex-col">
             <div
               class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
-              Tarde
+              <p class="border-b-2">Noite</p>
             </div>
           </div>
           <div>
             <div
               class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
-              <ul class="ulTarde flex flex-col justify-start gap-1" id="1"></ul>
+              <ul class="ulNoite flex flex-col justify-start gap-1" id="1"></ul>
             </div>
           </div>
 
           <div>
             <div
               class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
-              <ul class="ulTarde flex flex-col justify-start gap-1" id="2"></ul>
+              <ul class="ulNoite flex flex-col justify-start gap-1" id="2"></ul>
             </div>
           </div>
 
           <div>
             <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35">
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
               <ul
-                class="ulTarde flex flex-col justify-start gap-1 h-full"
+                class="ulNoite flex flex-col justify-start gap-1 h-full"
                 id="3"></ul>
             </div>
           </div>
@@ -171,7 +246,7 @@
           <div>
             <div
               class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
-              <ul class="ulTarde flex flex-col justify-start gap-1" id="4"></ul>
+              <ul class="ulNoite flex flex-col justify-start gap-1" id="4"></ul>
             </div>
           </div>
 
@@ -179,7 +254,7 @@
             <div
               class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
               <ul
-                class="ulTarde flex flex-col justify-start gap-1 h-full"
+                class="ulNoite flex flex-col justify-start gap-1 h-full"
                 id="5"></ul>
             </div>
           </div>
@@ -188,7 +263,77 @@
             <div
               class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
               <ul
-                class="ulTarde flex flex-col justify-start gap-1 h-full"
+                class="ulNoite flex flex-col justify-start gap-1 h-full"
+                id="6"></ul>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="flex flex-col justify-start gap-1 h-full"
+                id="ulNoiteDom"></ul>
+            </div>
+          </div>
+        </div>
+        <!-- linha das folgas -->
+        <div class="flex gap-2">
+          <div class="flex flex-col">
+            <div
+              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
+              <p class="border-b-2">Folgas</p>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1"
+                id="1"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1"
+                id="2"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1 h-full"
+                id="3"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1"
+                id="4"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1 h-full"
+                id="5"></ul>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
+              <ul
+                class="ulFolgas flex flex-col justify-start gap-1 h-full"
                 id="6"></ul>
             </div>
           </div>
@@ -196,47 +341,6 @@
             <div
               class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
               <ul class="flex flex-col justify-start gap-1 h-full" id=""></ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex gap-2">
-          <!-- linha da noite -->
-          <div class="flex flex-col">
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
-              Noite
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
-              <ul
-                class="ulNoite flex flex-col justify-start gap-1"
-                id="1"></ul>
-            </div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full">
-              <ul
-                class="ulNoite flex flex-col justify-start gap-1 h-full"
-                id="1"></ul>
-            </div>
-          </div>
-        </div>
-        <div class="flex gap-2">
-          <!-- linha da tarde -->
-          <div class="flex flex-col">
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20">
-              Folgas
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35">
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1 h-full"
-                id="1"></ul>
             </div>
           </div>
         </div>

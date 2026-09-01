@@ -33,17 +33,17 @@ window.onload = async () => {
       manha.push(moto);
     } else if (moto.horario == "noite") {
       noite.push(moto);
-    } else if(moto.horario == "inter"){
+    } else if (moto.horario == "inter") {
       inter.push(moto);
     }
     if (moto.id == 16) {
       mudarLetra = moto;
     }
-    console.log(escalaMotoboys);
     if (moto.trabDomingo[1] === "true") {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo[0].push(moto)
         : trabDomingo[1].push(moto);
+    } else if (moto.trabDomingo[0] == "não se aplica") {
     } else {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo2[0].push(moto)
@@ -100,6 +100,7 @@ window.onload = async () => {
       }
     });
   });
+
   trabDomingo.forEach((turnos, i) => {
     const divManha = document.querySelector("#ulManhaDom");
     const divNoite = document.querySelector("#ulNoiteDom");
@@ -114,7 +115,6 @@ window.onload = async () => {
 
 const mudarEscala = async () => {
   let mudancas = [];
-
   trabDomingo[0].forEach((m) => {
     const obj = {
       id: m.id,
@@ -172,7 +172,7 @@ const mudarEscala = async () => {
 
   console.log(data);
   console.log(error);
-  //location.reload()
+  location.reload();
 };
 
 const escalaAnterior = () => {
