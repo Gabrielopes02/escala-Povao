@@ -44,6 +44,7 @@ window.onload = async () => {
         ? trabDomingo[0].push(moto)
         : trabDomingo[1].push(moto);
     } else if (moto.trabDomingo[0] == "não se aplica") {
+      
     } else {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo2[0].push(moto)
@@ -146,10 +147,12 @@ const mudarEscala = async () => {
       trabDomingo: ["noite", true],
     };
     mudancas.push(obj);
+    
   });
 
   const idManha = manha.map((moto) => moto.id);
   const idNoite = noite.map((moto) => moto.id);
+  
   mudancas.forEach((m) => {
     if (mudarLetra.trabFeriado) {
       idManha.forEach((id) => {
@@ -163,22 +166,20 @@ const mudarEscala = async () => {
         }
       });
     }
+    
+    if(m.id == 16){
+  m.trabFeriado = ["nao se aplica","nao se aplica"]}
   });
-  const obj = {
-    nome: mudarLetra.nome,
-    id: 16,
-    trabFeriado: !mudarLetra.trabFeriado,
-  };
 
-  mudancas.push(obj);
-  const { data, error } = await dbSupabase
-    .from("escala_motoboys")
-    .upsert(mudancas)
-    .select();
+  //const { data, error } = await dbSupabase
+   // .from("escala_motoboys")
+    //.upsert(mudancas)
+    //.select();
 
-  console.log(data);
-  console.log(error);
-   location.reload();
+  //console.log(data);
+  //console.log(error);
+  console.log(mudancas)
+   //location.reload();
 };
 
 const escalaAnterior = () => {
