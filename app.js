@@ -239,4 +239,5 @@ const escalaAnterior = () => {
   };
   mudarFolga();
   uploadToSupabase();
+  console.log(123123)
 };
