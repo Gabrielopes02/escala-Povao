@@ -226,7 +226,6 @@ const escalaAnterior = () => {
     console.log(arrayFolgasVoltadas);
     mudancas = arrayFolgasVoltadas;
   };
-
   const uploadToSupabase = async () => {
     const { data, error } = await dbSupabase
       .from("escala_motoboys")
@@ -237,7 +236,20 @@ const escalaAnterior = () => {
     console.log(error);
     location.reload();
   };
-  mudarFolga();
-  uploadToSupabase();
-  console.log(123123)
+  const mudarDomingo = () => {
+    let mudancasDom = mudancas.map((m) => {
+      return {
+        ...m,
+        trabDomingo: [
+          m.trabDomingo[0],
+          m.trabDomingo[1] == "true" ? "false" : "true",
+        ],
+      };
+    });
+    console.log(mudancasdom);
+  };
+
+  mudarDomingo();
+  //  mudarFolga();
+  // uploadToSupabase();
 };
