@@ -13,7 +13,7 @@ let idTrabDom0Manha = [];
 let idTrabDom0Noite = [];
 let idTrabDom1Manha = [];
 let idTrabDom1Noite = [];
-let idAndFolgas = [];
+let mudancas = [];
 const mudarletra = "";
 
 const ulManha = Array.from(document.querySelectorAll(".ulManha"));
@@ -28,6 +28,7 @@ const buscarMotoboys = async () => {
 
 window.onload = async () => {
   const escalaMotoboys = await buscarMotoboys();
+  mudancas = escalaMotoboys;
   escalaMotoboys.forEach((moto) => {
     if (moto.horario == "manhã") {
       manha.push(moto);
@@ -54,12 +55,6 @@ window.onload = async () => {
     if (moto.nome == "Mudar Escala") {
       mudarLetra = moto;
     }
-
-    let auxidAndFolgas = [];
-    auxidAndFolgas.push(moto.id);
-    auxidAndFolgas.push(Number(moto.folga));
-    idAndFolgas.push(auxidAndFolgas);
-    auxidAndFolgas = [];
   });
   inter.push({ nome: "Virtualista" });
 
@@ -115,7 +110,6 @@ window.onload = async () => {
 };
 
 const mudarEscala = async () => {
-  let mudancas = [];
   const mudarDomingo = () => {
     trabDomingo[0].forEach((m) => {
       const obj = {
@@ -200,23 +194,49 @@ const mudarEscala = async () => {
   };
 
   const mudarFolga = () => {
-   
     mudancasFolga = mudancas.map((m) => {
       if (m.folga == 1) {
-        m.folga = 8
+        m.folga = 6;
       } else {
         m.folga = m.folga - 1;
       }
-      
-      return m
+
+      return m;
     });
-    mudancas = mudancasFolga
+    mudancas = mudancasFolga;
   };
 
-  mudarDomingo();
-  funcMudarLetra();
+  // mudarDomingo();
+  // funcMudarLetra();
   mudarFolga();
-  uploadToSupabase()
+  uploadToSupabase();
 };
 
-const escalaAnterior = () => {};
+const escalaAnterior = () => {
+  const mudarFolga = () => {
+    const arrayFolgasVoltadas = mudancas.map((m) => {
+      if (m.folga == 6) {
+        m.folga = 1;
+      } else {
+        m.folga = Number(m.folga) + 1;
+      }
+      return m;
+    });
+
+    console.log(arrayFolgasVoltadas);
+    mudancas = arrayFolgasVoltadas;
+  };
+
+  const uploadToSupabase = async () => {
+    const { data, error } = await dbSupabase
+      .from("escala_motoboys")
+      .upsert(mudancas)
+      .select();
+
+    console.log(data);
+    console.log(error);
+    location.reload();
+  };
+  mudarFolga();
+  uploadToSupabase();
+};
