@@ -36,18 +36,19 @@ window.onload = async () => {
     } else if (moto.horario == "inter") {
       inter.push(moto);
     }
-    if (moto.id == 16) {
-      mudarLetra = moto;
-    }
-    if (moto.trabDomingo[1] === "true") {
+
+    if (moto.trabDomingo[1] == "true") {
       moto.trabDomingo[0] == "manhã"
         ? trabDomingo[0].push(moto)
         : trabDomingo[1].push(moto);
-    } else if (moto.trabDomingo[0] == "não se aplica") {
     } else {
-      moto.trabDomingo[0] == "manhã"
-        ? trabDomingo2[0].push(moto)
-        : trabDomingo2[1].push(moto);
+      if (moto.id != 16) {
+        moto.trabDomingo[0] == "manhã"
+          ? trabDomingo2[0].push(moto)
+          : trabDomingo2[1].push(moto);
+      } else {
+        mudarLetra = moto;
+      }
     }
 
     if (moto.nome == "Mudar Escala") {
@@ -115,72 +116,106 @@ window.onload = async () => {
 
 const mudarEscala = async () => {
   let mudancas = [];
-  trabDomingo[0].forEach((m) => {
+  const mudarDomingo = () => {
+    trabDomingo[0].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["noite", false],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    trabDomingo[1].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["manhã", false],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    trabDomingo2[0].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["manhã", true],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    trabDomingo2[1].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["noite", true],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+  };
+  const funcMudarLetra = () => {
+    const idManha = manha.map((moto) => moto.id);
+    const idNoite = noite.map((moto) => moto.id);
+    mudancas.forEach((m) => {
+      if (mudarLetra.trabFeriado) {
+        idManha.forEach((id) => {
+          if (id == m.id) {
+            m.horario = "noite";
+          }
+        });
+        idNoite.forEach((id) => {
+          if (id == m.id) {
+            m.horario = "manhã";
+          }
+        });
+      }
+    });
     const obj = {
-      id: m.id,
-      nome: m.nome,
-      trabDomingo: ["noite", false],
+      nome: mudarLetra.nome,
+      id: 16,
+      trabFeriado: !mudarLetra.trabFeriado,
+      trabDomingo: ["nao se aplica", "nao se aplica"],
     };
-    mudancas.push(obj);
-  });
-  trabDomingo[1].forEach((m) => {
-    const obj = {
-      id: m.id,
-      nome: m.nome,
-      trabDomingo: ["manhã", false],
-    };
-    mudancas.push(obj);
-  });
-  trabDomingo2[0].forEach((m) => {
-    const obj = {
-      id: m.id,
-      nome: m.nome,
-      trabDomingo: ["manhã", true],
-    };
-    mudancas.push(obj);
-  });
-  trabDomingo2[1].forEach((m) => {
-    const obj = {
-      id: m.id,
-      nome: m.nome,
-      trabDomingo: ["noite", true],
-    };
-    mudancas.push(obj);
-  });
 
-  const idManha = manha.map((moto) => moto.id);
-  const idNoite = noite.map((moto) => moto.id);
-  mudancas.forEach((m) => {
-    if (mudarLetra.trabFeriado) {
-      idManha.forEach((id) => {
-        if (id == m.id) {
-          m.horario = "noite";
-        }
-      });
-      idNoite.forEach((id) => {
-        if (id == m.id) {
-          m.horario = "manhã";
-        }
-      });
-    }
-  });
-  const obj = {
-    nome: mudarLetra.nome,
-    id: 16,
-    trabFeriado: !mudarLetra.trabFeriado,
+    mudancas.push(obj);
+  };
+  const uploadToSupabase = async () => {
+    const { data, error } = await dbSupabase
+      .from("escala_motoboys")
+      .upsert(mudancas)
+      .select();
+
+    console.log(data);
+    console.log(error);
+    location.reload();
   };
 
-  mudancas.push(obj);
-  const { data, error } = await dbSupabase
-    .from("escala_motoboys")
-    .upsert(mudancas)
-    .select();
+  const mudarFolga = () => {
+    mudancasFolga = mudancas.map((m) => {
+      if (m.folga == 1) {
+        m.folga = 7;
+      } else {
+        m.folga = m.folga - 1;
+      }
 
-  console.log(data);
-  console.log(error);
-   location.reload();
+      return m;
+    });
+    mudancas = mudancasFolga;
+  };
+
+  mudarDomingo();
+  funcMudarLetra();
+  mudarFolga();
+  uploadToSupabase();
 };
 
-const escalaAnterior = () => {
-  console.log(mudarLetra);
-};
+const escalaAnterior = () => {};
