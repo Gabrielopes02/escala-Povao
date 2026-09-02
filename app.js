@@ -200,22 +200,23 @@ const mudarEscala = async () => {
   };
 
   const mudarFolga = () => {
+   
     mudancasFolga = mudancas.map((m) => {
       if (m.folga == 1) {
-        m.folga = 7;
+        m.folga = 8
       } else {
         m.folga = m.folga - 1;
       }
-
-      return m;
+      
+      return m
     });
-    mudancas = mudancasFolga;
+    mudancas = mudancasFolga
   };
 
   mudarDomingo();
   funcMudarLetra();
   mudarFolga();
-  uploadToSupabase();
+  uploadToSupabase()
 };
 
 const escalaAnterior = () => {};
