@@ -110,6 +110,7 @@ window.onload = async () => {
 };
 
 const mudarEscala = async () => {
+  mudancas = [];
   const mudarDomingo = () => {
     trabDomingo[0].forEach((m) => {
       const obj = {
@@ -155,6 +156,7 @@ const mudarEscala = async () => {
       };
       mudancas.push(obj);
     });
+    console.log(mudancas);
   };
   const funcMudarLetra = () => {
     const idManha = manha.map((moto) => moto.id);
@@ -206,13 +208,14 @@ const mudarEscala = async () => {
     mudancas = mudancasFolga;
   };
 
-  // mudarDomingo();
+  mudarDomingo();
   // funcMudarLetra();
-  mudarFolga();
+  //mudarFolga();
   uploadToSupabase();
 };
 
 const escalaAnterior = () => {
+  mudancas = []
   const mudarFolga = () => {
     const arrayFolgasVoltadas = mudancas.map((m) => {
       if (m.folga == 6) {
@@ -236,20 +239,56 @@ const escalaAnterior = () => {
     console.log(error);
     location.reload();
   };
-  const mudarDomingo = () => {
-    let mudancasDom = mudancas.map((m) => {
-      return {
-        ...m,
-        trabDomingo: [
-          m.trabDomingo[0],
-          m.trabDomingo[1] == "true" ? "false" : "true",
-        ],
-      };
-    });
-    console.log(mudancasdom);
-  };
 
+  const mudarDomingo = () => {
+    console.log(trabDomingo[0])
+    trabDomingo[0].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["noite", false],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    trabDomingo[1].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["manhã", false],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    trabDomingo2[0].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["manhã", true],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    trabDomingo2[1].forEach((m) => {
+      const obj = {
+        folga: m.folga,
+        horario: m.horario,
+        id: m.id,
+        nome: m.nome,
+        trabDomingo: ["noite", true],
+        trabFeriado: m.trabFeriado,
+      };
+      mudancas.push(obj);
+    });
+    console.log(mudancas);
+  };
   mudarDomingo();
   //  mudarFolga();
-  // uploadToSupabase();
+  //uploadToSupabase();
 };
