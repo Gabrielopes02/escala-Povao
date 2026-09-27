@@ -27,6 +27,7 @@ const buscarMotoboys = async () => {
 };
 
 window.onload = async () => {
+  console.log('teitei')
   const escalaMotoboys = await buscarMotoboys();
   mudancas = escalaMotoboys;
   escalaMotoboys.forEach((moto) => {
@@ -240,3 +241,18 @@ const escalaAnterior = () => {
   mudarFolga();
   uploadToSupabase();
 };
+const updateOutrasAreas = async()=>{
+
+
+const funcionarios = [
+  { nome: "A Clara", horario: "Noite", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
+  { nome: "Amanda", horario: "Intermediário", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
+  { nome: "Catia", horario: "Manhã", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
+  { nome: "F07", horario: "Intermediário", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
+  { nome: "Mª Julia", horario: "Manhã", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" }
+];
+
+const {data,error} =await dbSupabase.from('escala_motoboys').upsert(funcionarios).select()
+console.log(data)
+console.log(error)
+}
