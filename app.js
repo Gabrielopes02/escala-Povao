@@ -4,6 +4,15 @@ const key =
 
 const dbSupabase = supabase.createClient(url, key);
 
+let trabalhadores = "";
+let motoboys = [];
+let caixas = [];
+let separadores = [];
+let vendedores = [];
+let expedidores = [];
+let perfumistas = [];
+let balconistas = [];
+
 let manha = [];
 let noite = [];
 let inter = [];
@@ -15,22 +24,20 @@ let idTrabDom1Manha = [];
 let idTrabDom1Noite = [];
 let mudancas = [];
 const mudarletra = "";
-
 const ulManha = Array.from(document.querySelectorAll(".ulManha"));
 const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
 const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
 const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
 
-const buscarMotoboys = async () => {
+const buscarTrabalhadores = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
   return data;
 };
 
 window.onload = async () => {
-  console.log('teitei')
-  const escalaMotoboys = await buscarMotoboys();
-  mudancas = escalaMotoboys;
-  escalaMotoboys.forEach((moto) => {
+  trabalhadores = await buscarTrabalhadores();
+  mudancas = trabalhadores;
+  trabalhadores.forEach((moto) => {
     if (moto.horario == "manhã") {
       manha.push(moto);
     } else if (moto.horario == "noite") {
@@ -241,18 +248,16 @@ const escalaAnterior = () => {
   mudarFolga();
   uploadToSupabase();
 };
-const updateOutrasAreas = async()=>{
 
+const teste = () => {
+  trabalhadores.forEach((trabs) => {
+    if (trabs.cargo == "Caixa") {
+      caixas.push(trabs);
+    }
 
-const funcionarios = [
-  { nome: "A Clara", horario: "Noite", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
-  { nome: "Amanda", horario: "Intermediário", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
-  { nome: "Catia", horario: "Manhã", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
-  { nome: "F07", horario: "Intermediário", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" },
-  { nome: "Mª Julia", horario: "Manhã", folga: null, trabDomingo: null, trabFeriado: null, cargo: "Separação" }
-];
-
-const {data,error} =await dbSupabase.from('escala_motoboys').upsert(funcionarios).select()
-console.log(data)
-console.log(error)
-}
+    if (trabs.cargo == "motoboy") {
+      motoboys.push(trabs);
+    }
+  });
+  console.log(caixas);
+};
