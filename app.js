@@ -13,17 +13,6 @@ let expedidores = [];
 let perfumistas = [];
 let balconistas = [];
 
-let manha = [];
-let noite = [];
-let inter = [];
-let trabDomingo = [[], []];
-let trabDomingo2 = [[], []];
-let idTrabDom0Manha = [];
-let idTrabDom0Noite = [];
-let idTrabDom1Manha = [];
-let idTrabDom1Noite = [];
-let mudancas = [];
-const mudarletra = "";
 const ulManha = Array.from(document.querySelectorAll(".ulManha"));
 const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
 const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
@@ -36,87 +25,9 @@ const buscarTrabalhadores = async () => {
 
 window.onload = async () => {
   trabalhadores = await buscarTrabalhadores();
-  mudancas = trabalhadores;
-  trabalhadores.forEach((moto) => {
-    if (moto.horario == "manhã") {
-      manha.push(moto);
-    } else if (moto.horario == "noite") {
-      noite.push(moto);
-    } else if (moto.horario == "inter") {
-      inter.push(moto);
-    }
-
-    if (moto.trabDomingo[1] == "true") {
-      moto.trabDomingo[0] == "manhã"
-        ? trabDomingo[0].push(moto)
-        : trabDomingo[1].push(moto);
-    } else {
-      if (moto.id != 16) {
-        moto.trabDomingo[0] == "manhã"
-          ? trabDomingo2[0].push(moto)
-          : trabDomingo2[1].push(moto);
-      } else {
-        mudarLetra = moto;
-      }
-    }
-
-    if (moto.nome == "Mudar Escala") {
-      mudarLetra = moto;
-    }
-  });
-  inter.push({ nome: "Virtualista" });
-
-  ulManha.forEach((d, i) => {
-    manha.forEach((m) => {
-      if (d.id !== m.folga) {
-        const newLi = document.createElement("li");
-        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
-        d.append(newLi);
-      }
-    });
-  });
-  ulTarde.forEach((d, i) => {
-    inter.forEach((m) => {
-      if (d.id !== m.folga) {
-        const newLi = document.createElement("li");
-        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
-        d.append(newLi);
-      }
-    });
-  });
-
-  ulNoite.forEach((d, i) => {
-    noite.forEach((m) => {
-      if (d.id !== m.folga) {
-        const newLi = document.createElement("li");
-        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
-        d.append(newLi);
-      }
-    });
-  });
-  ulFolgas.forEach((d, i) => {
-    escalaMotoboys.forEach((m) => {
-      if (d.id == m.folga) {
-        let newLi = document.createElement("li");
-        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded"><i class="fa-solid fa-user text-blue-700"></i>${m.nome}</div>`;
-
-        d.append(newLi);
-      }
-    });
-  });
-
-  trabDomingo.forEach((turnos, i) => {
-    const divManha = document.querySelector("#ulManhaDom");
-    const divNoite = document.querySelector("#ulNoiteDom");
-    turnos.forEach((moto) => {
-      let newLi = document.createElement("li");
-      newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${moto.nome}</div>`;
-
-      i == 0 ? divManha.append(newLi) : divNoite.append(newLi);
-    });
-  });
+  separacaoDeCargo();
+  mBoysFunction();
 };
-
 const mudarEscala = async () => {
   const mudarDomingo = () => {
     trabDomingo[0].forEach((m) => {
@@ -249,8 +160,26 @@ const escalaAnterior = () => {
   uploadToSupabase();
 };
 
-const teste = () => {
+const separacaoDeCargo = () => {
   trabalhadores.forEach((trabs) => {
+    if (trabs.cargo == "Balcão") {
+      balconistas.push(trabs);
+    }
+    if (trabs.cargo == "Perfumaria") {
+      perfumistas.push(trabs);
+    }
+
+    if (trabs.cargo == "Expedição") {
+      expedidores.push(trabs);
+    }
+    if (trabs.cargo == "Vendas") {
+      vendedores.push(trabs);
+    }
+
+    if (trabs.cargo == "Separação") {
+      separadores.push(trabs);
+    }
+
     if (trabs.cargo == "Caixa") {
       caixas.push(trabs);
     }
@@ -259,5 +188,49 @@ const teste = () => {
       motoboys.push(trabs);
     }
   });
-  console.log(caixas);
+};
+const mBoysFunction = () => {
+
+
+  const separarPorHorario = (horario) => {
+    return motoboys.filter((boys) => boys.horario == horario);
+  };
+  const retornarArrayFolgas = () => {
+    let arrayFolgas = motoboys
+      .map((boys) => [boys.folga, boys.nome])
+      .sort()
+      .map((array) => array[1]);
+    // motoboys => [dia da folga,nome] => ordena em ordem crescente=>[nome sem a folga]
+    return arrayFolgas;
+  };
+  let trabalhadoresDomingoAtual = motoboys.filter(
+    (boys) => boys.trabDomingo[1] == "true",
+  );
+
+  let folgas = retornarArrayFolgas();
+  let motoboysManha = separarPorHorario("manhã");
+  let motoboysNoite = separarPorHorario("noite");
+  let motoboysIntermedio = separarPorHorario("inter");
+
+  const preencherEscala = () => {
+
+    const preencherUls = (ul, trabalhadores) => {
+      ul.forEach((ul) => {
+        trabalhadores.forEach((trabs) => {
+          const newLi = document.createElement("li");
+          let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
+
+          newLi.innerHTML = formatacaoLi;
+          ul.appendChild(newLi);
+        });
+      });
+    };
+    preencherUls(ulManha, motoboysManha);
+    preencherUls(ulTarde,motoboysIntermedio)
+    preencherUls(ulNoite,motoboysNoite)
+
+   
+  };
+  preencherEscala();
+  
 };
