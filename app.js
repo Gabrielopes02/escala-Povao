@@ -1,3 +1,11 @@
+/*
+TO DO LIST
+Arrumar sistema de 2 folgas na semana
+esacala da perfumaria tem horário diferente
+
+
+*/
+
 const url = "https://wbwlhifqyobcdilrwjog.supabase.co";
 const key =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid2xoaWZxeW9iY2RpbHJ3am9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNDQxNDQsImV4cCI6MjA5ODkyMDE0NH0.3fIMSgxi9eSAf6TPzcCKca243I49gRWJcnpm95GCojY";
@@ -17,148 +25,20 @@ const ulManha = Array.from(document.querySelectorAll(".ulManha"));
 const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
 const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
 const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
+const ulDomManha = document.querySelector("#ulManhaDom");
+const ulDomInter = document.querySelector('#ulInterDom')
+const ulDomNoite = document.querySelector("#ulNoiteDom");
 
 const buscarTrabalhadores = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
   return data;
-};
+}; // funcao de consumir o banco
 
 window.onload = async () => {
   trabalhadores = await buscarTrabalhadores();
   separacaoDeCargo();
-  mBoysFunction();
-};
-const mudarEscala = async () => {
-  const mudarDomingo = () => {
-    trabDomingo[0].forEach((m) => {
-      const obj = {
-        folga: m.folga,
-        horario: m.horario,
-        id: m.id,
-        nome: m.nome,
-        trabDomingo: ["noite", false],
-        trabFeriado: m.trabFeriado,
-      };
-      mudancas.push(obj);
-    });
-    trabDomingo[1].forEach((m) => {
-      const obj = {
-        folga: m.folga,
-        horario: m.horario,
-        id: m.id,
-        nome: m.nome,
-        trabDomingo: ["manhã", false],
-        trabFeriado: m.trabFeriado,
-      };
-      mudancas.push(obj);
-    });
-    trabDomingo2[0].forEach((m) => {
-      const obj = {
-        folga: m.folga,
-        horario: m.horario,
-        id: m.id,
-        nome: m.nome,
-        trabDomingo: ["manhã", true],
-        trabFeriado: m.trabFeriado,
-      };
-      mudancas.push(obj);
-    });
-    trabDomingo2[1].forEach((m) => {
-      const obj = {
-        folga: m.folga,
-        horario: m.horario,
-        id: m.id,
-        nome: m.nome,
-        trabDomingo: ["noite", true],
-        trabFeriado: m.trabFeriado,
-      };
-      mudancas.push(obj);
-    });
-  };
-  const funcMudarLetra = () => {
-    const idManha = manha.map((moto) => moto.id);
-    const idNoite = noite.map((moto) => moto.id);
-    mudancas.forEach((m) => {
-      if (mudarLetra.trabFeriado) {
-        idManha.forEach((id) => {
-          if (id == m.id) {
-            m.horario = "noite";
-          }
-        });
-        idNoite.forEach((id) => {
-          if (id == m.id) {
-            m.horario = "manhã";
-          }
-        });
-      }
-    });
-    const obj = {
-      nome: mudarLetra.nome,
-      id: 16,
-      trabFeriado: !mudarLetra.trabFeriado,
-      trabDomingo: ["nao se aplica", "nao se aplica"],
-    };
-
-    mudancas.push(obj);
-  };
-  const uploadToSupabase = async () => {
-    const { data, error } = await dbSupabase
-      .from("escala_motoboys")
-      .upsert(mudancas)
-      .select();
-
-    console.log(data);
-    console.log(error);
-    location.reload();
-  };
-
-  const mudarFolga = () => {
-    mudancasFolga = mudancas.map((m) => {
-      if (m.folga == 1) {
-        m.folga = 6;
-      } else {
-        m.folga = m.folga - 1;
-      }
-
-      return m;
-    });
-    mudancas = mudancasFolga;
-  };
-
-  // mudarDomingo();
-  // funcMudarLetra();
-  mudarFolga();
-  uploadToSupabase();
-};
-
-const escalaAnterior = () => {
-  const mudarFolga = () => {
-    const arrayFolgasVoltadas = mudancas.map((m) => {
-      if (m.folga == 6) {
-        m.folga = 1;
-      } else {
-        m.folga = Number(m.folga) + 1;
-      }
-      return m;
-    });
-
-    console.log(arrayFolgasVoltadas);
-    mudancas = arrayFolgasVoltadas;
-  };
-
-  const uploadToSupabase = async () => {
-    const { data, error } = await dbSupabase
-      .from("escala_motoboys")
-      .upsert(mudancas)
-      .select();
-
-    console.log(data);
-    console.log(error);
-    location.reload();
-  };
-  mudarFolga();
-  uploadToSupabase();
-};
+  preencherEscalaPorArea(balconistas);
+}; //função para consumir o banco supabase assim que carregar a pagina
 
 const separacaoDeCargo = () => {
   trabalhadores.forEach((trabs) => {
@@ -188,49 +68,98 @@ const separacaoDeCargo = () => {
       motoboys.push(trabs);
     }
   });
-};
-const mBoysFunction = () => {
+}; // function to separate the colaborators by their positions
 
-
+const preencherEscalaPorArea = (area) => {// preenchendo conforme a area especificada como argumento da funcao 
   const separarPorHorario = (horario) => {
-    return motoboys.filter((boys) => boys.horario == horario);
+    return area.filter((trabs) => trabs.horario == horario);
   };
-  const retornarArrayFolgas = () => {
-    let arrayFolgas = motoboys
-      .map((boys) => [boys.folga, boys.nome])
-      .sort()
-      .map((array) => array[1]);
+  const retornarArrayFolgas = (area) => {
+    let arrayFolgas = area.map((trabs) => [trabs.folga, trabs.nome]).sort();
     // motoboys => [dia da folga,nome] => ordena em ordem crescente=>[nome sem a folga]
     return arrayFolgas;
   };
-  let trabalhadoresDomingoAtual = motoboys.filter(
-    (boys) => boys.trabDomingo[1] == "true",
+  let trabalhadoresDomingoAtual = area.filter(
+    (trabs) => trabs.trabDomingo[1] == "true",
   );
 
-  let folgas = retornarArrayFolgas();
-  let motoboysManha = separarPorHorario("manhã");
-  let motoboysNoite = separarPorHorario("noite");
-  let motoboysIntermedio = separarPorHorario("inter");
+  let folgas = retornarArrayFolgas(area);
+  let trabsManha = separarPorHorario("manha");
+  let trabsNoite = separarPorHorario("noite");
+  let trabsIntermedio = separarPorHorario("inter");
 
-  const preencherEscala = () => {
+  const preencherEscala = (area) => {
+
 
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         trabalhadores.forEach((trabs) => {
-          const newLi = document.createElement("li");
-          let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
-
-          newLi.innerHTML = formatacaoLi;
-          ul.appendChild(newLi);
+          if (trabs.folga !== ul.id) {
+            const newLi = document.createElement("li");
+            let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
+    
+            newLi.innerHTML = formatacaoLi;
+            ul.appendChild(newLi);
+          }
         });
       });
     };
-    preencherUls(ulManha, motoboysManha);
-    preencherUls(ulTarde,motoboysIntermedio)
-    preencherUls(ulNoite,motoboysNoite)
-
-   
+    const preencherFolga = () => {
+      ulFolgas.forEach((ul) => {
+        folgas.forEach((folga) => {
+          if (folga[0] == ul.id) {
+            const newLi = document.createElement("li");
+            let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
+    
+            newLi.innerHTML = formatacaoLi;
+            ul.appendChild(newLi);
+          }
+        });
+      });
+    };
+    const preencherDomingo = () => {
+      trabalhadoresDomingoAtual.forEach((trabs) => {
+        let newLi = document.createElement('li')
+        newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
+        if (trabs.trabDomingo[0] == "manha") {
+            ulDomManha.appendChild(newLi)
+        }
+        if(trabs.trabDomingo[0] == 'inter'){
+          ulDomInter.appendChild(newLi)
+        }
+        if(trabs.trabDomingo[0]=='noite'){
+          ulDomNoite.appendChild(newLi)
+        }
+      });
+    };
+    preencherFolga();
+    preencherUls(ulManha, trabsManha);
+    preencherUls(ulTarde, trabsIntermedio);
+    preencherUls(ulNoite, trabsNoite);
+    preencherDomingo();
   };
-  preencherEscala();
-  
+
+  preencherEscala(area);
+}; // funcao que faz varias coisas (mudar isso e o nome dela)
+
+const teste = () => {
+  // let mudancas = [];
+  // motoboys.forEach((boys) => {
+  //   if (boys.horario == "noite") {
+  //     boys.horario = "manha";
+  //     mudancas.push(boys);
+  //   } else if (boys.horario == "inter") {
+  //   } else {
+  //     boys.horario = "noite";
+  //     mudancas.push(boys);
+  //   }
+  // });
+};
+
+const uploadToSupaBase = async (mudancas) => {
+  const { data, error } = await dbSupabase
+    .from("escala_motoboys")
+    .upsert(mudancas)
+    .select();
+  console.log(data);
 };
