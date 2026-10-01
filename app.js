@@ -162,3 +162,30 @@ const uploadToSupaBase = async (mudancas) => {
     .select();
   console.log(data);
 };
+
+const mudarEscala = (trabalhadores) => {
+  let mudancas = trabalhadores.map((trabs) => {// mudando folgas para o dia anterior
+
+    
+
+    return {
+      ...trabs,
+      folga: trabs.folga - 1,
+    };
+  });
+  
+
+  console.log(mudancas);
+  const mudarFolgas = () => {
+    trabalhadores.forEach((trabs) => {
+      let folgas = trabs.folga - 1;
+      trabs.folga = folgas;
+      mudancas.push(trabs);
+    });
+  };
+  const mudarHorario = () => {
+    mudancas.forEach((trabs) => {});
+  };
+  // mudarFolgas();
+  // mudarHorario();
+};
