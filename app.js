@@ -26,7 +26,7 @@ const ulTarde = Array.from(document.querySelectorAll(".ulTarde"));
 const ulNoite = Array.from(document.querySelectorAll(".ulNoite"));
 const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
 const ulDomManha = document.querySelector("#ulManhaDom");
-const ulDomInter = document.querySelector('#ulInterDom')
+const ulDomInter = document.querySelector("#ulInterDom");
 const ulDomNoite = document.querySelector("#ulNoiteDom");
 
 const buscarTrabalhadores = async () => {
@@ -37,7 +37,7 @@ const buscarTrabalhadores = async () => {
 window.onload = async () => {
   trabalhadores = await buscarTrabalhadores();
   separacaoDeCargo();
-  preencherEscalaPorArea(balconistas);
+  preencherEscalaPorArea(motoboys);
 }; //função para consumir o banco supabase assim que carregar a pagina
 
 const separacaoDeCargo = () => {
@@ -70,7 +70,8 @@ const separacaoDeCargo = () => {
   });
 }; // function to separate the colaborators by their positions
 
-const preencherEscalaPorArea = (area) => {// preenchendo conforme a area especificada como argumento da funcao 
+const preencherEscalaPorArea = (area) => {
+  // preenchendo conforme a area especificada como argumento da funcao
   const separarPorHorario = (horario) => {
     return area.filter((trabs) => trabs.horario == horario);
   };
@@ -80,7 +81,7 @@ const preencherEscalaPorArea = (area) => {// preenchendo conforme a area especif
     return arrayFolgas;
   };
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true",
+    (trabs) => trabs.trabDomingo[1] == "true"
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -89,15 +90,13 @@ const preencherEscalaPorArea = (area) => {// preenchendo conforme a area especif
   let trabsIntermedio = separarPorHorario("inter");
 
   const preencherEscala = (area) => {
-
-
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         trabalhadores.forEach((trabs) => {
           if (trabs.folga !== ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
-    
+
             newLi.innerHTML = formatacaoLi;
             ul.appendChild(newLi);
           }
@@ -110,7 +109,7 @@ const preencherEscalaPorArea = (area) => {// preenchendo conforme a area especif
           if (folga[0] == ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
-    
+
             newLi.innerHTML = formatacaoLi;
             ul.appendChild(newLi);
           }
@@ -119,16 +118,16 @@ const preencherEscalaPorArea = (area) => {// preenchendo conforme a area especif
     };
     const preencherDomingo = () => {
       trabalhadoresDomingoAtual.forEach((trabs) => {
-        let newLi = document.createElement('li')
+        let newLi = document.createElement("li");
         newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
         if (trabs.trabDomingo[0] == "manha") {
-            ulDomManha.appendChild(newLi)
+          ulDomManha.appendChild(newLi);
         }
-        if(trabs.trabDomingo[0] == 'inter'){
-          ulDomInter.appendChild(newLi)
+        if (trabs.trabDomingo[0] == "inter") {
+          ulDomInter.appendChild(newLi);
         }
-        if(trabs.trabDomingo[0]=='noite'){
-          ulDomNoite.appendChild(newLi)
+        if (trabs.trabDomingo[0] == "noite") {
+          ulDomNoite.appendChild(newLi);
         }
       });
     };
