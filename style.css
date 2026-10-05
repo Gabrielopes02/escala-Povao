@@ -1,28 +1,45 @@
 nav {
-  background-color: white;
-  height: 100vh;
+  background-color:rgb(35, 39, 253);
+  border-radius: 0px 10px 10px 0px;
   width: 200px;
   padding: 5px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition:all ease 0.5s;
+  white-space:nowrap;
+  overflow:hidden;
+  box-shadow: 4px 4px 10px rgb(255, 255, 252) ;
   ul {
     display: flex;
     gap: 10px;
     flex-direction: column;
     li {
-      border: 2px solid black;
+      border: 2px solid black ;
       border-radius:5px;
       width: 100%;
       display: flex;
+      &:hover{
+  background-color:rgb(126, 129, 255);
+          cursor:pointer;
+        }
       button {
         width: 100%;
         display: flex;
         gap: 10px;
         align-items: center;
         margin: 5px;
+        &:hover{
+          cursor:pointer;
+        }
       }
     }
+  }
+}
+.open{
+  width:45px;
+  button{
+    overflow: hidden;
   }
 }

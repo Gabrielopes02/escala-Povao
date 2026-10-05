@@ -28,7 +28,43 @@ const ulFolgas = Array.from(document.querySelectorAll(".ulFolgas"));
 const ulDomManha = document.querySelector("#ulManhaDom");
 const ulDomInter = document.querySelector("#ulInterDom");
 const ulDomNoite = document.querySelector("#ulNoiteDom");
+const nav = document.querySelector("#menuLateral");
+const botoesNav = Array.from(nav.getElementsByTagName("li"));
+botoesNav.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    let cargo = event.currentTarget.dataset.option;
+    switch (cargo) {
+      case "motoboys":
+        preencherEscalaPorArea(motoboys);
+        break;
+      case "caixas":
+        preencherEscalaPorArea(caixas);
+        break;
+      case "separadores":
+        preencherEscalaPorArea(separadores);
+        break;
+      case "vendedores":
+        preencherEscalaPorArea(vendedores);
+        break;
+      case "expedidores":
+        preencherEscalaPorArea(expedidores);
+        break;
+      case "perfumistas":
+        preencherEscalaPorArea(perfumistas);
+        break;
+      case "balconistas":
+        preencherEscalaPorArea(balconistas);
+        break;
+    }
+  });
+});
 
+nav.addEventListener("mouseenter", () => {
+  nav.classList.toggle("open");
+});
+nav.addEventListener("mouseleave", () => {
+  nav.classList.toggle("open");
+});
 const buscarTrabalhadores = async () => {
   const { data, error } = await dbSupabase.from("escala_motoboys").select("*");
   return data;
@@ -92,6 +128,7 @@ const preencherEscalaPorArea = (area) => {
   const preencherEscala = (area) => {
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
+        ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
           if (trabs.folga !== ul.id) {
             const newLi = document.createElement("li");
@@ -105,6 +142,7 @@ const preencherEscalaPorArea = (area) => {
     };
     const preencherFolga = () => {
       ulFolgas.forEach((ul) => {
+        ul.innerHTML = "";
         folgas.forEach((folga) => {
           if (folga[0] == ul.id) {
             const newLi = document.createElement("li");
@@ -117,10 +155,13 @@ const preencherEscalaPorArea = (area) => {
       });
     };
     const preencherDomingo = () => {
+      ulDomManha.innerHTML = "";
+      ulDomInter.innerHTML = "";
+      ulDomNoite.innerHTML = "";
       trabalhadoresDomingoAtual.forEach((trabs) => {
         let newLi = document.createElement("li");
         newLi.innerHTML = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
-        if (trabs.trabDomingo[0] == "manha") {
+        if (trabs.trabDomingo[0] == "manhã") {
           ulDomManha.appendChild(newLi);
         }
         if (trabs.trabDomingo[0] == "inter") {
@@ -142,6 +183,7 @@ const preencherEscalaPorArea = (area) => {
 }; // funcao que faz varias coisas (mudar isso e o nome dela)
 
 const teste = () => {
+  console.log(motoboys);
   // let mudancas = [];
   // motoboys.forEach((boys) => {
   //   if (boys.horario == "noite") {
