@@ -2,7 +2,7 @@
 TO DO LIST
 Arrumar sistema de 2 folgas na semana
 esacala da perfumaria tem horário diferente
-
+ trocar escala pra proxima semana 
 
 */
 
@@ -81,7 +81,7 @@ const preencherEscalaPorArea = (area) => {
     return arrayFolgas;
   };
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true"
+    (trabs) => trabs.trabDomingo[1] == "true",
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -164,16 +164,14 @@ const uploadToSupaBase = async (mudancas) => {
 };
 
 const mudarEscala = (trabalhadores) => {
-  let mudancas = trabalhadores.map((trabs) => {// mudando folgas para o dia anterior
-
-    
+  let mudancas = trabalhadores.map((trabs) => {
+    // mudando folgas para o dia anterior
 
     return {
       ...trabs,
       folga: trabs.folga - 1,
     };
   });
-  
 
   console.log(mudancas);
   const mudarFolgas = () => {
