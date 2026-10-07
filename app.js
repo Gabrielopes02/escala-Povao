@@ -3,7 +3,8 @@ TO DO LIST
 Arrumar sistema de 2 folgas na semana
 esacala da perfumaria tem horário diferente
  trocar escala pra proxima semana 
-
+escala do balçao roda diferente:
+*fabricio e douglas abrindo na primeira quinzena do mes
 */
 
 const url = "https://wbwlhifqyobcdilrwjog.supabase.co";
@@ -206,26 +207,62 @@ const uploadToSupaBase = async (mudancas) => {
 };
 
 const mudarEscala = (trabalhadores) => {
-  let mudancas = trabalhadores.map((trabs) => {
-    // mudando folgas para o dia anterior
+  let mudancas = "";
 
-    return {
-      ...trabs,
-      folga: trabs.folga - 1,
-    };
-  });
-
-  console.log(mudancas);
   const mudarFolgas = () => {
-    trabalhadores.forEach((trabs) => {
-      let folgas = trabs.folga - 1;
-      trabs.folga = folgas;
-      mudancas.push(trabs);
+    mudancas = trabalhadores.map((trabs) => {
+      return {
+        ...trabs,
+        folga: trabs.folga - 1,
+      };
     });
   };
+
   const mudarHorario = () => {
-    mudancas.forEach((trabs) => {});
+    let trabsManha = [];
+    let trabsNoite = [];
+    mudancas.forEach((trabs) => {
+      if (trabs.horario == "manha") {
+        trabsManha.push(trabs);
+      } else if ((trabs.horario = "noite")) {
+        trabsNoite.push(trabs);
+      }
+    });
+
+    let trabsManhaToNoite = trabsManha.map((trabs) => {
+      return { ...trabs, horario: "noite" };
+    });
+    let trabsNoiteToManha = trabsNoite.map((trabs) => {
+      return { ...trabs, horario: "manha" };
+    });
   };
-  // mudarFolgas();
-  // mudarHorario();
+
+  const mudarDomingo = () => {
+    mudancas = mudancas.map((trabs) => {
+      if (trabs.trabDomingo[1] == "true") {
+        return {
+          ...trabs,
+          trabDomingo: [trabs.trabDomingo[0], "false"],
+        };
+      } else {
+        if (trabs.trabDomingo[0] == "manhã") {
+          return {
+            ...trabs,
+            trabDomingo: ["noite", "true"],
+          };
+        } else if (trabs.trabDomingo[0] == "noite") {
+          return {
+            ...trabs,
+            trabDomingo: ["manha", "false"],
+          };
+        } else {
+          return trabs;
+        }
+      }
+    });
+  };
+  mudarFolgas();
+  mudarHorario();
+  mudarDomingo();
+  console.log(mudancas);
 };
