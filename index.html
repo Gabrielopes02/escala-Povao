@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -20,57 +20,66 @@
     </style>
   </head>
   <body
-    class="w-screen h-screen flex items-center justify-center font-['Poppins'] bg-blue-300"
+    class="w-screen min-h-screen relative flex flex-col items-center font-['Poppins'] bg-blue-300"
   >
-    <nav class="open" id="menuLateral">
-      <ul>
-        <li data-option="motoboys">
-          <button>
-            <i class="fa-solid fa-motorcycle"></i>
-            <p>motoboys</p>
-          </button>
-        </li>
+    <div class="flex justify-center bg-yellow-300 mb-2 rounded-2xl p-5 m-2 ">
+      <img
+        src="https://drogariaspovao.com.br/media/logomobile.svg?w=500"
+        alt="Drogaria Povao"
+        width="250"
+        height="50"
+      />
+    </div>
+    <div class="flex w-full justify-center items-center">
+      <nav class="open" id="menuLateral">
+        <ul>
+          <li data-option="motoboys">
+            <button>
+              <i class="fa-solid fa-motorcycle"></i>
+              <p>motoboys</p>
+            </button>
+          </li>
 
-        <li data-option="caixas">
-          <button>
-            <i class="fa-solid fa-money-bill-1-wave"></i>
-            <p>Caixa</p>
-          </button>
-        </li>
-        <li data-option="separadores">
-          <button>
-            <i class="fa-solid fa-hand-back-fist"></i>
-            <p>Separação</p>
-          </button>
-        </li>
-        <li data-option="vendedores">
-          <button>
-            <i class="fa-solid fa-tags"></i>
-            <p>Vendas</p>
-          </button>
-        </li>
+          <li data-option="caixas">
+            <button>
+              <i class="fa-solid fa-money-bill-1-wave"></i>
+              <p>Caixa</p>
+            </button>
+          </li>
+          <li data-option="separadores">
+            <button>
+              <i class="fa-solid fa-hand-back-fist"></i>
+              <p>Separação</p>
+            </button>
+          </li>
+          <li data-option="vendedores">
+            <button>
+              <i class="fa-solid fa-tags"></i>
+              <p>Vendas</p>
+            </button>
+          </li>
 
-        <li data-option="expedidores">
-          <button>
-            <i class="fa-solid fa-computer"></i>
-            <p>Expedição</p>
-          </button>
-        </li>
-        <li data-option="perfumistas">
-          <button>
-            <i class="fa-solid fa-spray-can-sparkles"></i>
-            <p>Perfumaria</p>
-          </button>
-        </li>
-        <li data-option="balconistas">
-          <button>
-            <i class="fa-solid fa-tablets"></i>
-            <p>Balcão</p>
-          </button>
-        </li>
-      </ul>
+          <li data-option="expedidores">
+            <button>
+              <i class="fa-solid fa-computer"></i>
+              <p>Expedição</p>
+            </button>
+          </li>
+          <li data-option="perfumistas">
+            <button>
+              <i class="fa-solid fa-spray-can-sparkles"></i>
+              <p>Perfumaria</p>
+            </button>
+          </li>
+          <li data-option="balconistas">
+            <button>
+              <i class="fa-solid fa-tablets"></i>
+              <p>Balcão</p>
+            </button>
+          </li>
+        </ul>
 
-      <!-- asdasd
+        <!-- asdasd
        
       
 let trabalhadores = "";
@@ -81,403 +90,411 @@ let vendedores = [];
 let expedidores = [];
 let perfumistas = [];
 let balconistas = [];-->
-    </nav>
+      </nav>
 
-    <section class="h-full w-full p-5 flex flex-col items-center">
-      <!-- escala povao -->
-      <div class="flex justify-center bg-yellow-300 mb-2 w-full">
-        escalas Povão
-      </div>
+      <section class="h-full w-full p-5 flex flex-col items-center">
+        <!-- escala povao -->
 
-      <div class="flex justify-between mb-2 w-full">
-        <button
-          class="rounded p-1 bg-blue-900 text-yellow-500 hover:bg-blue-600 hover:text-white shadow-md shadow-yellow-100"
-          onclick="teste()"
-        >
-          Anterior
-        </button>
-        <button
-          class="rounded p-1 text-yellow-500 bg-blue-900 hover:bg-blue-600 hover:text-white shadow-md shadow-yellow-100"
-          onclick="mudarEscala(motoboys)"
-        >
-          Próximo
-        </button>
-      </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-between mb-2 w-full px-1">
+            <button
+              class="rounded p-1 bg-blue-900 text-yellow-500 hover:bg-blue-600 hover:text-white shadow-md shadow-yellow-100"
+              onclick="teste()"
+            >
+              Anterior
+            </button>
+            <button
+              class="rounded p-1 text-yellow-500 bg-blue-900 hover:bg-blue-600 hover:text-white shadow-md shadow-yellow-100"
+              onclick="mudarEscala(motoboys)"
+            >
+              Próximo
+            </button>
+          </div>
+          <!-- linha da Manhã -->
+          <div class="flex gap-2">
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl min-w-20"
+              >
+                horario
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <p class="border-b-2">Manhã</p>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 rounded-t-xl py-2 w-35"
+              >
+                <p class="text-yellow-500">Segunda</p>
+              </div>
+              <div
+                class="flex items-start justify-center bg-white rounded-b-xl p-2 h-full"
+              >
+                <ul
+                  class="ulManha flex flex-col justify-start gap-1"
+                  id="1"
+                ></ul>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+              >
+                Terça
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <ul
+                  class="ulManha flex flex-col justify-start gap-1 h-full"
+                  id="2"
+                ></ul>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+              >
+                Quarta
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <ul
+                  class="ulManha flex flex-col justify-start gap-1 h-full"
+                  id="3"
+                ></ul>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+              >
+                Quinta
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <ul
+                  class="ulManha flex flex-col justify-start gap-1 h-full"
+                  id="4"
+                ></ul>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+              >
+                Sexta
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <ul
+                  class="ulManha flex flex-col justify-start gap-1 h-full"
+                  id="5"
+                ></ul>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+              >
+                Sábado
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <ul
+                  class="ulManha flex flex-col justify-start gap-1 h-full"
+                  id="6"
+                ></ul>
+              </div>
+            </div>
 
-      <div class="flex flex-col gap-2">
-        <!-- linha da Manhã -->
-        <div class="flex gap-2">
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl min-w-20"
-            >
-              horario
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <p class="border-b-2">Manhã</p>
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 rounded-t-xl py-2 w-35"
-            >
-              <p class="text-yellow-500">Segunda</p>
-            </div>
-            <div
-              class="flex items-start justify-center bg-white rounded-b-xl p-2 h-full"
-            >
-              <ul class="ulManha flex flex-col justify-start gap-1" id="1"></ul>
+            <div class="flex flex-col">
+              <div
+                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+              >
+                Domingo
+              </div>
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
+              >
+                <ul
+                  class="flex flex-col justify-start gap-1 h-full"
+                  id="ulManhaDom"
+                ></ul>
+              </div>
             </div>
           </div>
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
-            >
-              Terça
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <ul
-                class="ulManha flex flex-col justify-start gap-1 h-full"
-                id="2"
-              ></ul>
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
-            >
-              Quarta
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <ul
-                class="ulManha flex flex-col justify-start gap-1 h-full"
-                id="3"
-              ></ul>
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
-            >
-              Quinta
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <ul
-                class="ulManha flex flex-col justify-start gap-1 h-full"
-                id="4"
-              ></ul>
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
-            >
-              Sexta
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <ul
-                class="ulManha flex flex-col justify-start gap-1 h-full"
-                id="5"
-              ></ul>
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
-            >
-              Sábado
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <ul
-                class="ulManha flex flex-col justify-start gap-1 h-full"
-                id="6"
-              ></ul>
-            </div>
-          </div>
-
-          <div class="flex flex-col">
-            <div
-              class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
-            >
-              Domingo
-            </div>
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
-            >
-              <ul
-                class="flex flex-col justify-start gap-1 h-full"
-                id="ulManhaDom"
-              ></ul>
-            </div>
-          </div>
-        </div>
-        <!-- linha da tarde -->
-        <div class="flex gap-2">
           <!-- linha da tarde -->
-          <div class="flex flex-col">
-            <!-- column 1 -->
-            <div
-              class="flex flex-col items-center justify-between p-2 bg-white h-full rounded-xl min-w-20"
-            >
-              <p class="border-b-2">9h40</p>
-              <p class="border-b-2">10h00</p>
-              <p class="border-b-2">11h00</p>
+          <div class="flex gap-2">
+            <!-- linha da tarde -->
+            <div class="flex flex-col">
+              <!-- column 1 -->
+              <div
+                class="flex flex-col items-center justify-between p-2 bg-white h-full rounded-xl min-w-20"
+              >
+                <p class="border-b-2">9h40</p>
+                <p class="border-b-2">10h00</p>
+                <p class="border-b-2">11h00</p>
+              </div>
             </div>
-          </div>
-          <!-- column2 -->
-          <div>
-            <div
-              class="flex justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulTarde flex flex-col justify-between gap-1"
-                id="1"
-              ></ul>
+            <!-- column2 -->
+            <div>
+              <div
+                class="flex justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulTarde flex flex-col justify-between gap-1"
+                  id="1"
+                ></ul>
+              </div>
             </div>
-          </div>
-          <!-- column3 -->
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulTarde flex flex-col justify-between gap-1"
-                id="2"
-              ></ul>
+            <!-- column3 -->
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulTarde flex flex-col justify-between gap-1"
+                  id="2"
+                ></ul>
+              </div>
             </div>
-          </div>
-          <!-- column4 -->
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulTarde flex flex-col justify-between gap-1 h-full"
-                id="3"
-              ></ul>
+            <!-- column4 -->
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulTarde flex flex-col justify-between gap-1 h-full"
+                  id="3"
+                ></ul>
+              </div>
             </div>
-          </div>
-          <!-- column5 -->
+            <!-- column5 -->
 
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulTarde flex flex-col justify-between gap-1"
-                id="4"
-              ></ul>
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulTarde flex flex-col justify-between gap-1"
+                  id="4"
+                ></ul>
+              </div>
             </div>
-          </div>
-          <!-- column6 -->
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulTarde flex flex-col justify-between gap-1 h-full"
-                id="5"
-              ></ul>
+            <!-- column6 -->
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulTarde flex flex-col justify-between gap-1 h-full"
+                  id="5"
+                ></ul>
+              </div>
             </div>
-          </div>
-          <!-- column7 -->
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulTarde flex flex-col justify-between gap-1 h-full"
-                id="6"
-              ></ul>
+            <!-- column7 -->
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulTarde flex flex-col justify-between gap-1 h-full"
+                  id="6"
+                ></ul>
+              </div>
             </div>
-          </div>
 
-          <!-- column8 -->
+            <!-- column8 -->
 
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="flex flex-col justify-between gap-1 h-full"
-                id="ulInterDom"
-              ></ul>
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="flex flex-col justify-between gap-1 h-full"
+                  id="ulInterDom"
+                ></ul>
+              </div>
+            </div>
+          </div>
+          <!-- linha da noite -->
+          <div class="flex gap-2">
+            <div class="flex flex-col">
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20"
+              >
+                <p class="border-b-2">Noite</p>
+              </div>
+            </div>
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulNoite flex flex-col justify-start gap-1"
+                  id="1"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulNoite flex flex-col justify-start gap-1"
+                  id="2"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulNoite flex flex-col justify-start gap-1 h-full"
+                  id="3"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulNoite flex flex-col justify-start gap-1"
+                  id="4"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulNoite flex flex-col justify-start gap-1 h-full"
+                  id="5"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulNoite flex flex-col justify-start gap-1 h-full"
+                  id="6"
+                ></ul>
+              </div>
+            </div>
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="flex flex-col justify-start gap-1 h-full"
+                  id="ulNoiteDom"
+                ></ul>
+              </div>
+            </div>
+          </div>
+          <!-- linha das folgas -->
+          <div class="flex gap-2">
+            <div class="flex flex-col">
+              <div
+                class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20"
+              >
+                <p class="border-b-2">Folgas</p>
+              </div>
+            </div>
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulFolgas flex flex-col justify-start gap-1"
+                  id="1"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulFolgas flex flex-col justify-start gap-1"
+                  id="2"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulFolgas flex flex-col justify-start gap-1 h-full"
+                  id="3"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulFolgas flex flex-col justify-start gap-1"
+                  id="4"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulFolgas flex flex-col justify-start gap-1 h-full"
+                  id="5"
+                ></ul>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul
+                  class="ulFolgas flex flex-col justify-start gap-1 h-full"
+                  id="6"
+                ></ul>
+              </div>
+            </div>
+            <div>
+              <div
+                class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
+              >
+                <ul class="flex flex-col justify-start gap-1 h-full" id=""></ul>
+              </div>
             </div>
           </div>
         </div>
-        <!-- linha da noite -->
-        <div class="flex gap-2">
-          <div class="flex flex-col">
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20"
-            >
-              <p class="border-b-2">Noite</p>
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul class="ulNoite flex flex-col justify-start gap-1" id="1"></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul class="ulNoite flex flex-col justify-start gap-1" id="2"></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulNoite flex flex-col justify-start gap-1 h-full"
-                id="3"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul class="ulNoite flex flex-col justify-start gap-1" id="4"></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulNoite flex flex-col justify-start gap-1 h-full"
-                id="5"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulNoite flex flex-col justify-start gap-1 h-full"
-                id="6"
-              ></ul>
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="flex flex-col justify-start gap-1 h-full"
-                id="ulNoiteDom"
-              ></ul>
-            </div>
-          </div>
-        </div>
-        <!-- linha das folgas -->
-        <div class="flex gap-2">
-          <div class="flex flex-col">
-            <div
-              class="flex items-center justify-center p-2 bg-white h-full rounded-xl min-w-20"
-            >
-              <p class="border-b-2">Folgas</p>
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1"
-                id="1"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1"
-                id="2"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1 h-full"
-                id="3"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1"
-                id="4"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1 h-full"
-                id="5"
-              ></ul>
-            </div>
-          </div>
-
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul
-                class="ulFolgas flex flex-col justify-start gap-1 h-full"
-                id="6"
-              ></ul>
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex items-start justify-center bg-white rounded-xl p-2 w-35 h-full"
-            >
-              <ul class="flex flex-col justify-start gap-1 h-full" id=""></ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+      </section>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
