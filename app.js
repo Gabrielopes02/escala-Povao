@@ -185,17 +185,6 @@ const preencherEscalaPorArea = (area) => {
 
 const teste = () => {
   console.log(motoboys);
-  // let mudancas = [];
-  // motoboys.forEach((boys) => {
-  //   if (boys.horario == "noite") {
-  //     boys.horario = "manha";
-  //     mudancas.push(boys);
-  //   } else if (boys.horario == "inter") {
-  //   } else {
-  //     boys.horario = "noite";
-  //     mudancas.push(boys);
-  //   }
-  // });
 };
 
 const uploadToSupaBase = async (mudancas) => {
@@ -208,16 +197,17 @@ const uploadToSupaBase = async (mudancas) => {
 
 const mudarEscala = (trabalhadores) => {
   let mudancas = "";
-
+console.log(trabalhadores)
   const mudarFolgas = () => {
     mudancas = trabalhadores.map((trabs) => {
+      console.log(trabs)
       return {
-        ...trabs,
+        ...structuredClone(trabs),
         folga: trabs.folga - 1,
       };
+      console.log(mudancas)
     });
   };
-
   const mudarHorario = () => {
     let trabsManha = [];
     let trabsNoite = [];
@@ -233,7 +223,7 @@ const mudarEscala = (trabalhadores) => {
       return { ...trabs, horario: "noite" };
     });
     let trabsNoiteToManha = trabsNoite.map((trabs) => {
-      return { ...trabs, horario: "manha" };
+      return { ...trabs, horario: "manhã" };
     });
   };
 
@@ -253,7 +243,7 @@ const mudarEscala = (trabalhadores) => {
         } else if (trabs.trabDomingo[0] == "noite") {
           return {
             ...trabs,
-            trabDomingo: ["manha", "false"],
+            trabDomingo: ["manhã", "false"],
           };
         } else {
           return trabs;
@@ -261,8 +251,12 @@ const mudarEscala = (trabalhadores) => {
       }
     });
   };
-  mudarFolgas();
-  mudarHorario();
-  mudarDomingo();
   console.log(mudancas);
+  mudarFolgas();
+  console.log(mudancas);
+
+  mudarHorario();
+
+  // mudarDomingo();
+  preencherEscalaPorArea(mudancas);
 };
