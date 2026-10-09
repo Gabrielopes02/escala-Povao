@@ -118,7 +118,7 @@ const preencherEscalaPorArea = (area) => {
     return arrayFolgas;
   };
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true",
+    (trabs) => trabs.trabDomingo[1] == "true"
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -196,34 +196,27 @@ const uploadToSupaBase = async (mudancas) => {
 };
 
 const mudarEscala = (trabalhadores) => {
-  let mudancas = "";
-console.log(trabalhadores)
-  const mudarFolgas = () => {
-    mudancas = trabalhadores.map((trabs) => {
-      console.log(trabs)
-      return {
-        ...structuredClone(trabs),
-        folga: trabs.folga - 1,
-      };
-      console.log(mudancas)
-    });
-  };
+  let mudancas = [];
   const mudarHorario = () => {
-    let trabsManha = [];
-    let trabsNoite = [];
-    mudancas.forEach((trabs) => {
-      if (trabs.horario == "manha") {
-        trabsManha.push(trabs);
-      } else if ((trabs.horario = "noite")) {
-        trabsNoite.push(trabs);
+    trabalhadores.forEach((trabs) => {
+      let obj = trabs;
+      if (obj.horario == "manha") {
+        obj.horario = "noite";
+        mudancas.push(obj);
+      } else if (obj.horario == "noite") {
+        obj.horario = "manha";
+        mudancas.push(obj);
+      } else {
+        mudancas.push(obj);
       }
     });
-
-    let trabsManhaToNoite = trabsManha.map((trabs) => {
-      return { ...trabs, horario: "noite" };
-    });
-    let trabsNoiteToManha = trabsNoite.map((trabs) => {
-      return { ...trabs, horario: "manhã" };
+  };
+  const mudarFolgas = () => {
+    mudancas = mudancas.map((trabs) => {
+      if (trabs.folga == 1) return { ...trabs, folga: 6 };
+      else {
+        return { ...trabs, folga: trabs.folga - 1 };
+      }
     });
   };
 
@@ -251,12 +244,10 @@ console.log(trabalhadores)
       }
     });
   };
-  console.log(mudancas);
-  mudarFolgas();
-  console.log(mudancas);
-
   mudarHorario();
+  mudarFolgas();
+  mudarDomingo();
+  console.log(mudancas);
 
-  // mudarDomingo();
   preencherEscalaPorArea(mudancas);
 };
