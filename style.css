@@ -14,7 +14,7 @@ nav {
   transition:all ease 0.5s;
   white-space:nowrap;
   overflow:hidden;
-  max-height: 350px;
+  max-height: 400px;
   box-shadow: 4px 4px 10px rgb(255, 255, 252) ;
   ul {
     display: flex;
@@ -47,4 +47,9 @@ nav {
   button{
     overflow: hidden;
   }
+}
+.modeEdit{
+&:hover{
+  background-color: gray;
+}
 }

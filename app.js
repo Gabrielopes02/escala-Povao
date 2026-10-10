@@ -31,6 +31,44 @@ const ulDomInter = document.querySelector("#ulInterDom");
 const ulDomNoite = document.querySelector("#ulNoiteDom");
 const nav = document.querySelector("#menuLateral");
 const botoesNav = Array.from(nav.getElementsByTagName("li"));
+const btnEdit = document.querySelector("#btnEdit");
+const btnOk = document.querySelector("#btnOk");
+const btnVoltar = document.querySelector("#btnVoltar");
+const modal = document.querySelector("#modal");
+const passWord = "senha123";
+btnVoltar.addEventListener("click", () => {
+  modal.close();
+});
+btnOk.addEventListener("click", () => {
+  let input = document.querySelector("#inputModal");
+  let p = document.querySelector("#pModal");
+  if (input.value == passWord) {
+    input.value = "";
+    modal.close();
+    p.classList.add("hidden");
+    modoEdit();
+  } else {
+    p.classList.toggle("hidden");
+    input.value = "";
+  }
+});
+
+btnEdit.addEventListener("click", () => {
+  // modal.showModal();
+  modoEdit();
+});
+
+const modoEdit = () => {
+  const liDivsManha = document
+    .querySelector("#divsManha")
+    .querySelectorAll("li");
+  liDivsManha.forEach((li) => {
+    li.addEventListener("click", () => {
+      li.classList.add('mode')
+    });
+  });
+};
+
 botoesNav.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     let cargo = event.currentTarget.dataset.option;
@@ -118,7 +156,7 @@ const preencherEscalaPorArea = (area) => {
     return arrayFolgas;
   };
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true"
+    (trabs) => trabs.trabDomingo[1] == "true",
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -196,7 +234,7 @@ const uploadToSupaBase = async (mudancas) => {
 };
 
 const mudarEscala = (trabalhadores) => {
-  let mudancas = [];
+  let mudancas = trabalhadores;
   const mudarHorario = () => {
     trabalhadores.forEach((trabs) => {
       let obj = trabs;
@@ -212,11 +250,8 @@ const mudarEscala = (trabalhadores) => {
     });
   };
   const mudarFolgas = () => {
-    mudancas = mudancas.map((trabs) => {
-      if (trabs.folga == 1) return { ...trabs, folga: 6 };
-      else {
-        return { ...trabs, folga: trabs.folga - 1 };
-      }
+    mudancas.forEach((trabs) => {
+      trabs.folga--;
     });
   };
 
@@ -244,9 +279,9 @@ const mudarEscala = (trabalhadores) => {
       }
     });
   };
-  mudarHorario();
+  // mudarHorario();
   mudarFolgas();
-  mudarDomingo();
+  // mudarDomingo();
   console.log(mudancas);
 
   preencherEscalaPorArea(mudancas);

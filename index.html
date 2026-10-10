@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -22,7 +22,23 @@
   <body
     class="w-screen min-h-screen relative flex flex-col items-center font-['Poppins'] bg-blue-300"
   >
-    <div class="flex justify-center bg-yellow-300 mb-2 rounded-2xl p-5 m-2 ">
+    <dialog
+    
+    id= "modal"
+      class="bg-blue-900 fixed rounded-2xl max-w-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 backdrop:bg-black/70"
+    >
+      <div class="  flex  flex-col  justify-center items-center gap-3 rounded-2xl">
+        <h2 class="text-blue-900 font-bold bg-yellow-300 w-full rounded-t-2xl p-2 text-center">Senha para Editar</h2>
+        <input id="inputModal" type="text" class="bg-white rounded-xl w-50 p-2 text-center mx-3" placeholder="Digite a senha"/>
+        <p class="text-red-500 text-md hidden" id="pModal" >senha incorreta!</p>
+        <div class="flex justify-between w-full px-2 pb-2">
+          <button id="btnVoltar" class="bg-yellow-300 p-1 rounded-xl hover:bg-yellow-100 cursor-pointer">Voltar</button>
+          <button id='btnOk' class="bg-yellow-300 px-3 rounded-xl hover:bg-yellow-100 cursor-pointer">OK</button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="flex justify-center bg-yellow-300 mb-2 rounded-2xl p-5 m-2">
       <img
         src="https://drogariaspovao.com.br/media/logomobile.svg?w=500"
         alt="Drogaria Povao"
@@ -77,6 +93,12 @@
               <p>Balcão</p>
             </button>
           </li>
+          <li id="btnEdit">
+            <button>
+              <i class="fa-solid fa-square-pen text-xl"></i>
+              <p>editar</p>
+            </button>
+          </li>
         </ul>
 
         <!-- asdasd
@@ -111,7 +133,7 @@ let balconistas = [];-->
             </button>
           </div>
           <!-- linha da Manhã -->
-          <div class="flex gap-2">
+          <div class="flex gap-2" id="divsManha">
             <div class="flex flex-col">
               <div
                 class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl min-w-20"
