@@ -62,10 +62,27 @@ const modoEdit = () => {
   const liDivsManha = document
     .querySelector("#divsManha")
     .querySelectorAll("li");
+
   liDivsManha.forEach((li) => {
-    li.addEventListener("click", () => {
-      li.classList.add('mode')
+    li.classList.add("modeEdit");
+
+    li.addEventListener("mousedown", () => {
+
+
+      window.addEventListener("mousemove", (event) => {
+        li.style.position = "absolute";
+        li.style.left = `${event.pageX}px`;
+        li.style.top = `${event.pageY}px`;
+        li.style.transform = `translate(-50%,-50%)`;
+        li.style.backgroundColor = 'white'
+      });
+
+      
+
     });
+    li.addEventListener('mouseup',()=>{
+    })
+   
   });
 };
 
@@ -171,7 +188,7 @@ const preencherEscalaPorArea = (area) => {
         trabalhadores.forEach((trabs) => {
           if (trabs.folga !== ul.id) {
             const newLi = document.createElement("li");
-            let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
+            let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
             newLi.innerHTML = formatacaoLi;
             ul.appendChild(newLi);

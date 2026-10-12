@@ -50,6 +50,7 @@ nav {
 }
 .modeEdit{
 &:hover{
-  background-color: gray;
+  transform: scale(1.2);
+  cursor:pointer
 }
 }
