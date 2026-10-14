@@ -67,22 +67,15 @@ const modoEdit = () => {
     li.classList.add("modeEdit");
 
     li.addEventListener("mousedown", () => {
-
-
       window.addEventListener("mousemove", (event) => {
         li.style.position = "absolute";
         li.style.left = `${event.pageX}px`;
         li.style.top = `${event.pageY}px`;
         li.style.transform = `translate(-50%,-50%)`;
-        li.style.backgroundColor = 'white'
+        li.style.backgroundColor = "white";
       });
-
-      
-
     });
-    li.addEventListener('mouseup',()=>{
-    })
-   
+    li.addEventListener("mouseup", () => {});
   });
 };
 
@@ -182,11 +175,13 @@ const preencherEscalaPorArea = (area) => {
   let trabsIntermedio = separarPorHorario("inter");
 
   const preencherEscala = (area) => {
+
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
-          if (trabs.folga !== ul.id) {
+          console.log(trabs.folga,ul.id)
+          if (trabs.folga != ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
@@ -250,55 +245,56 @@ const uploadToSupaBase = async (mudancas) => {
   console.log(data);
 };
 
+const objTeste = [
+  {
+    horario: "noite",
+    cargo: "motoboy",
+    folga: 2,
+    id: 14,
+    nome: "Caldeira",
+    trabDomingo: ["noite", "false"],
+    trabFeriado: null,
+  },
+];
+
 const mudarEscala = (trabalhadores) => {
   let mudancas = trabalhadores;
+
   const mudarHorario = () => {
-    trabalhadores.forEach((trabs) => {
-      let obj = trabs;
-      if (obj.horario == "manha") {
-        obj.horario = "noite";
-        mudancas.push(obj);
-      } else if (obj.horario == "noite") {
-        obj.horario = "manha";
-        mudancas.push(obj);
-      } else {
-        mudancas.push(obj);
+    mudancas.forEach((trabs) => {
+      if (trabs.horario == "manha") {
+        trabs.horario = "noite";
+      } else if (trabs.horario == "noite") {
+        trabs.horario = "manha";
       }
     });
   };
   const mudarFolgas = () => {
     mudancas.forEach((trabs) => {
+      if(trabs.folga ==1){
+        trabs.folga = 6
+      }
       trabs.folga--;
     });
   };
 
   const mudarDomingo = () => {
-    mudancas = mudancas.map((trabs) => {
+    mudancas.forEach((trabs) => {
       if (trabs.trabDomingo[1] == "true") {
-        return {
-          ...trabs,
-          trabDomingo: [trabs.trabDomingo[0], "false"],
-        };
+        trabs.trabDomingo[1] = "false";
       } else {
+        trabs.trabDomingo[1] = "true";
         if (trabs.trabDomingo[0] == "manhã") {
-          return {
-            ...trabs,
-            trabDomingo: ["noite", "true"],
-          };
+          trabs.trabDomingo[0] = "noite";
         } else if (trabs.trabDomingo[0] == "noite") {
-          return {
-            ...trabs,
-            trabDomingo: ["manhã", "false"],
-          };
-        } else {
-          return trabs;
+          trabs.trabDomingo[0] = "manhã";
         }
       }
     });
   };
-  // mudarHorario();
+  mudarHorario();
   mudarFolgas();
-  // mudarDomingo();
+  mudarDomingo();
   console.log(mudancas);
 
   preencherEscalaPorArea(mudancas);
