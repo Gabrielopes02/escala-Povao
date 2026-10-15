@@ -23,17 +23,35 @@
     class="w-screen min-h-screen relative flex flex-col items-center font-['Poppins'] bg-blue-300"
   >
     <dialog
-    
-    id= "modal"
+      id="modal"
       class="bg-blue-900 fixed rounded-2xl max-w-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 backdrop:bg-black/70"
     >
-      <div class="  flex  flex-col  justify-center items-center gap-3 rounded-2xl">
-        <h2 class="text-blue-900 font-bold bg-yellow-300 w-full rounded-t-2xl p-2 text-center">Senha para Editar</h2>
-        <input id="inputModal" type="text" class="bg-white rounded-xl w-50 p-2 text-center mx-3" placeholder="Digite a senha"/>
-        <p class="text-red-500 text-md hidden" id="pModal" >senha incorreta!</p>
+      <div class="flex flex-col justify-center items-center gap-3 rounded-2xl">
+        <h2
+          class="text-blue-900 font-bold bg-yellow-300 w-full rounded-t-2xl p-2 text-center"
+        >
+          Senha para Editar
+        </h2>
+        <input
+          id="inputModal"
+          type="text"
+          class="bg-white rounded-xl w-50 p-2 text-center mx-3"
+          placeholder="Digite a senha"
+        />
+        <p class="text-red-500 text-md hidden" id="pModal">senha incorreta!</p>
         <div class="flex justify-between w-full px-2 pb-2">
-          <button id="btnVoltar" class="bg-yellow-300 p-1 rounded-xl hover:bg-yellow-100 cursor-pointer">Voltar</button>
-          <button id='btnOk' class="bg-yellow-300 px-3 rounded-xl hover:bg-yellow-100 cursor-pointer">OK</button>
+          <button
+            id="btnVoltar"
+            class="bg-yellow-300 p-1 rounded-xl hover:bg-yellow-100 cursor-pointer"
+          >
+            Voltar
+          </button>
+          <button
+            id="btnOk"
+            class="bg-yellow-300 px-3 rounded-xl hover:bg-yellow-100 cursor-pointer"
+          >
+            OK
+          </button>
         </div>
       </div>
     </dialog>
@@ -127,7 +145,7 @@ let balconistas = [];-->
             </button>
             <button
               class="rounded p-1 text-yellow-500 bg-blue-900 hover:bg-blue-600 hover:text-white hover:cursor-pointer shadow-md shadow-yellow-100"
-              onclick="mudarEscala(objTeste)"
+              onclick="mudarEscala(motoboys)"
             >
               Próximo
             </button>
@@ -138,7 +156,7 @@ let balconistas = [];-->
               <div
                 class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl min-w-20"
               >
-                horario
+                <p>Horário</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
@@ -148,9 +166,10 @@ let balconistas = [];-->
             </div>
             <div class="flex flex-col">
               <div
-                class="flex justify-center items-center bg-blue-900 rounded-t-xl py-2 w-35"
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                <p class="text-yellow-500">Segunda</p>
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-start justify-center bg-white rounded-b-xl p-2 h-full"
@@ -162,10 +181,11 @@ let balconistas = [];-->
               </div>
             </div>
             <div class="flex flex-col">
-              <div
-                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+             <div
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                Terça
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
@@ -177,10 +197,11 @@ let balconistas = [];-->
               </div>
             </div>
             <div class="flex flex-col">
-              <div
-                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+            <div
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                Quarta
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
@@ -192,10 +213,11 @@ let balconistas = [];-->
               </div>
             </div>
             <div class="flex flex-col">
-              <div
-                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+             <div
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                Quinta
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
@@ -207,10 +229,11 @@ let balconistas = [];-->
               </div>
             </div>
             <div class="flex flex-col">
-              <div
-                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+             <div
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                Sexta
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
@@ -222,10 +245,11 @@ let balconistas = [];-->
               </div>
             </div>
             <div class="flex flex-col">
-              <div
-                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+             <div
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                Sábado
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"
@@ -238,10 +262,11 @@ let balconistas = [];-->
             </div>
 
             <div class="flex flex-col">
-              <div
-                class="flex justify-center items-center bg-blue-900 text-yellow-500 py-2 rounded-t-xl w-35"
+           <div
+                class="flex flex-col justify-center items-center bg-blue-900 rounded-t-xl  w-35"
               >
-                Domingo
+                <p class="text-yellow-500 p-1">Segunda</p>
+                <p class="datas border-t-2 w-full flex justify-center text-yellow-500 p-1">07/05/26</p>
               </div>
               <div
                 class="flex items-center justify-center p-2 bg-white h-full rounded-b-xl"

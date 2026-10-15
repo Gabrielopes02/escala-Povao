@@ -175,12 +175,11 @@ const preencherEscalaPorArea = (area) => {
   let trabsIntermedio = separarPorHorario("inter");
 
   const preencherEscala = (area) => {
-
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
-          console.log(trabs.folga,ul.id)
+          console.log(trabs.folga, ul.id);
           if (trabs.folga != ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
@@ -249,7 +248,7 @@ const objTeste = [
   {
     horario: "noite",
     cargo: "motoboy",
-    folga: 2,
+    folga: [2],
     id: 14,
     nome: "Caldeira",
     trabDomingo: ["noite", "false"],
@@ -271,10 +270,11 @@ const mudarEscala = (trabalhadores) => {
   };
   const mudarFolgas = () => {
     mudancas.forEach((trabs) => {
-      if(trabs.folga ==1){
-        trabs.folga = 6
+      if (trabs.folga == 1) {
+        trabs.folga = 7;
+      } else {
+        trabs.folga--;
       }
-      trabs.folga--;
     });
   };
 
@@ -295,7 +295,6 @@ const mudarEscala = (trabalhadores) => {
   mudarHorario();
   mudarFolgas();
   mudarDomingo();
-  console.log(mudancas);
-
+  uploadToSupaBase(mudancas);
   preencherEscalaPorArea(mudancas);
 };
