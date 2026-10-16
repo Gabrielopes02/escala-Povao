@@ -179,7 +179,6 @@ const preencherEscalaPorArea = (area) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
-          console.log(trabs.folga, ul.id);
           if (trabs.folga != ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
@@ -241,24 +240,81 @@ const uploadToSupaBase = async (mudancas) => {
     .from("escala_motoboys")
     .upsert(mudancas)
     .select();
-  console.log(data);
 };
 
-const objTeste = [
-  {
-    horario: "noite",
-    cargo: "motoboy",
-    folga: [2],
-    id: 14,
-    nome: "Caldeira",
-    trabDomingo: ["noite", "false"],
-    trabFeriado: null,
-  },
-];
+// const objTeste = [
+//   {
+//     horario: "noite",
+//     cargo: "motoboy",
+//     folga: [2],
+//     id: 14,
+//     nome: "Caldeira",
+//     trabDomingo: ["noite", "false"],
+//     trabFeriado: null,
+//   },
+// ];
 
 const mudarEscala = (trabalhadores) => {
   let mudancas = trabalhadores;
 
+  const mudarDatas = () => {
+    const feriados = [
+      ["02/11", "15/11", "20/11", "25/12"],
+      [
+        "01/01",
+        "09/02",
+        "26/03",
+        "21/04",
+        "23/04",
+        "01/05",
+        "27/05",
+        "13/06",
+        "17/07",
+        "07/09",
+        "12/10",
+        "02/11",
+        "15/11",
+        "20/11",
+        "25/12",
+      ],
+    ];
+    let date = new Date();
+    const datas = document.querySelectorAll(".datas");
+    let ultimoDia = datas[datas.length - 1].textContent.split("/")[0];
+    let dias = Number(ultimoDia) + 1;
+    let ultimoDiaDoMes = new Date(
+      date.getFullYear(),
+      date.getMonth() + 1,
+      0,
+    ).getDate();
+    let mes = date.getMonth() + 1;
+    datas.forEach((data) => {
+      if (dias == ultimoDiaDoMes) {
+        console.log("ultimodia");
+        dias = 1;
+        mes++;
+      }
+      data.textContent = "";
+      data.textContent = `${dias}/${mes}`;
+      if (date.getFullYear() == "2026") {
+        feriados[0].forEach((feriado) => {
+          if (`${dias}/${mes}` == feriado) {
+            data.textContent = "";
+            data.textContent = `Feriado`;
+          }
+        });
+      } else {
+        feriados[1].forEach((feriado) => {
+          if (`${dias}/${mes}` == feriado) {
+            data.textContent = "";
+            data.textContent = `Feriado`;
+          }
+        });
+      }
+
+      dias++;
+    });
+  };
   const mudarHorario = () => {
     mudancas.forEach((trabs) => {
       if (trabs.horario == "manha") {
@@ -292,6 +348,7 @@ const mudarEscala = (trabalhadores) => {
       }
     });
   };
+  mudarDatas();
   mudarHorario();
   mudarFolgas();
   mudarDomingo();
