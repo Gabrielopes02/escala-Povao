@@ -55,7 +55,8 @@ btnOk.addEventListener("click", () => {
 
 btnEdit.addEventListener("click", () => {
   // modal.showModal();
-  modoEdit();
+  // modoEdit();
+  teste();
 });
 
 const modoEdit = () => {
@@ -123,8 +124,19 @@ window.onload = async () => {
   trabalhadores = await buscarTrabalhadores();
   separacaoDeCargo();
   preencherEscalaPorArea(motoboys);
+  transformadaDeArray();
 }; //função para consumir o banco supabase assim que carregar a pagina
-
+const transformadaDeArray = () => {
+  motoboys.forEach((trabs) => {
+    Array.from(trabs.folga).forEach((carac) => {
+      if (!Number.isNaN(Number(carac))) {
+        trabs.folga = new Array()
+        typeof(trabs.folga)
+        trabs.folga.push(Number(carac))
+      }
+    });
+  });
+};
 const separacaoDeCargo = () => {
   trabalhadores.forEach((trabs) => {
     if (trabs.cargo == "Balcão") {
@@ -165,6 +177,7 @@ const preencherEscalaPorArea = (area) => {
     // motoboys => [dia da folga,nome] => ordena em ordem crescente=>[nome sem a folga]
     return arrayFolgas;
   };
+
   let trabalhadoresDomingoAtual = area.filter(
     (trabs) => trabs.trabDomingo[1] == "true",
   );
@@ -173,13 +186,13 @@ const preencherEscalaPorArea = (area) => {
   let trabsManha = separarPorHorario("manha");
   let trabsNoite = separarPorHorario("noite");
   let trabsIntermedio = separarPorHorario("inter");
-
   const preencherEscala = (area) => {
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
-          if (trabs.folga != ul.id) {
+          if (trabs.folga[0] != ul.id) {
+          console.log(typeof(trabs.folga),ul.id)
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
@@ -231,7 +244,12 @@ const preencherEscalaPorArea = (area) => {
   preencherEscala(area);
 }; // funcao que faz varias coisas (mudar isso e o nome dela)
 
-const teste = () => {
+const teste = async () => {
+  motoboys.forEach((trabs) => {
+    console.log(trabs.folga[2]);
+    trabs.folga = [Number(trabs.folga[2])];
+  });
+  // await uploadToSupaBase(motoboys);
   console.log(motoboys);
 };
 
@@ -240,6 +258,7 @@ const uploadToSupaBase = async (mudancas) => {
     .from("escala_motoboys")
     .upsert(mudancas)
     .select();
+  console.log(data, error);
 };
 
 // const objTeste = [
@@ -254,7 +273,7 @@ const uploadToSupaBase = async (mudancas) => {
 //   },
 // ];
 
-const mudarEscala = (trabalhadores) => {
+const mudarEscala = async (trabalhadores) => {
   let mudancas = trabalhadores;
 
   const mudarDatas = () => {
@@ -352,6 +371,8 @@ const mudarEscala = (trabalhadores) => {
   mudarHorario();
   mudarFolgas();
   mudarDomingo();
-  uploadToSupaBase(mudancas);
-  preencherEscalaPorArea(mudancas);
+  // uploadToSupaBase(mudancas);
+  // preencherEscalaPorArea(mudancas);
+  // teste();
+  //    await uploadToSupaBase(motoboys)
 };
