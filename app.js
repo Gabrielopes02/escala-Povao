@@ -174,20 +174,20 @@ const preencherEscalaPorArea = (area) => {
   let trabsManha = separarPorHorario("manha");
   let trabsNoite = separarPorHorario("noite");
   let trabsIntermedio = separarPorHorario("inter");
-  console.log(folgas)
 
   const preencherEscala = (area) => {
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
-          console.log(trabs.folgas[0])
-          if ((trabs.folgas[0] != ul.id)) {
-            const newLi = document.createElement("li");
-            let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
+          if (trabs.folgas[0] != ul.id) {
+            if (trabs.folgas[1] != ul.id) {
+              const newLi = document.createElement("li");
+              let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
-            newLi.innerHTML = formatacaoLi;
-            ul.appendChild(newLi);
+              newLi.innerHTML = formatacaoLi;
+              ul.appendChild(newLi);
+            }
           }
         });
       });
@@ -196,7 +196,7 @@ const preencherEscalaPorArea = (area) => {
       ulFolgas.forEach((ul) => {
         ul.innerHTML = "";
         folgas.forEach((folga) => {
-          if ((folga[0][0] == ul.id)||(folga[0][1] == ul.id)) {
+          if (folga[0][0] == ul.id || folga[0][1] == ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
 
@@ -225,7 +225,6 @@ const preencherEscalaPorArea = (area) => {
       });
     };
 
-
     preencherFolga();
     preencherUls(ulManha, trabsManha);
     preencherUls(ulTarde, trabsIntermedio);
@@ -238,10 +237,10 @@ const preencherEscalaPorArea = (area) => {
 
 const teste = async () => {
   motoboys.forEach((trabs) => {
-  trabs.folgas = trabs.folga
+    trabs.folgas = trabs.folga;
   });
   //  await uploadToSupaBase(motoboys);
-  };
+};
 
 const uploadToSupaBase = async (mudancas) => {
   const { data, error } = await dbSupabase
