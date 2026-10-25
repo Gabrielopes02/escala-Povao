@@ -124,19 +124,7 @@ window.onload = async () => {
   trabalhadores = await buscarTrabalhadores();
   separacaoDeCargo();
   preencherEscalaPorArea(motoboys);
-  transformadaDeArray();
 }; //função para consumir o banco supabase assim que carregar a pagina
-const transformadaDeArray = () => {
-  motoboys.forEach((trabs) => {
-    Array.from(trabs.folga).forEach((carac) => {
-      if (!Number.isNaN(Number(carac))) {
-        trabs.folga = new Array()
-        typeof(trabs.folga)
-        trabs.folga.push(Number(carac))
-      }
-    });
-  });
-};
 const separacaoDeCargo = () => {
   trabalhadores.forEach((trabs) => {
     if (trabs.cargo == "Balcão") {
@@ -173,7 +161,7 @@ const preencherEscalaPorArea = (area) => {
     return area.filter((trabs) => trabs.horario == horario);
   };
   const retornarArrayFolgas = (area) => {
-    let arrayFolgas = area.map((trabs) => [trabs.folga, trabs.nome]).sort();
+    let arrayFolgas = area.map((trabs) => [trabs.folgas, trabs.nome]).sort();
     // motoboys => [dia da folga,nome] => ordena em ordem crescente=>[nome sem a folga]
     return arrayFolgas;
   };
@@ -186,13 +174,15 @@ const preencherEscalaPorArea = (area) => {
   let trabsManha = separarPorHorario("manha");
   let trabsNoite = separarPorHorario("noite");
   let trabsIntermedio = separarPorHorario("inter");
+  console.log(folgas)
+
   const preencherEscala = (area) => {
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
-          if (trabs.folga[0] != ul.id) {
-          console.log(typeof(trabs.folga),ul.id)
+          console.log(trabs.folgas[0])
+          if ((trabs.folgas[0] != ul.id)) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
@@ -206,7 +196,7 @@ const preencherEscalaPorArea = (area) => {
       ulFolgas.forEach((ul) => {
         ul.innerHTML = "";
         folgas.forEach((folga) => {
-          if (folga[0] == ul.id) {
+          if ((folga[0][0] == ul.id)||(folga[0][1] == ul.id)) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
 
@@ -234,6 +224,8 @@ const preencherEscalaPorArea = (area) => {
         }
       });
     };
+
+
     preencherFolga();
     preencherUls(ulManha, trabsManha);
     preencherUls(ulTarde, trabsIntermedio);
@@ -246,12 +238,10 @@ const preencherEscalaPorArea = (area) => {
 
 const teste = async () => {
   motoboys.forEach((trabs) => {
-    console.log(trabs.folga[2]);
-    trabs.folga = [Number(trabs.folga[2])];
+  trabs.folgas = trabs.folga
   });
-  // await uploadToSupaBase(motoboys);
-  console.log(motoboys);
-};
+  //  await uploadToSupaBase(motoboys);
+  };
 
 const uploadToSupaBase = async (mudancas) => {
   const { data, error } = await dbSupabase
