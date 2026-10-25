@@ -167,7 +167,7 @@ const preencherEscalaPorArea = (area) => {
   };
 
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true",
+    (trabs) => trabs.trabDomingo[1] == "true"
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -186,7 +186,7 @@ const preencherEscalaPorArea = (area) => {
               let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
               newLi.innerHTML = formatacaoLi;
-              ul.appendChild(newLi);
+              ul.appendChild(newLi); 
             }
           }
         });
@@ -196,7 +196,7 @@ const preencherEscalaPorArea = (area) => {
       ulFolgas.forEach((ul) => {
         ul.innerHTML = "";
         folgas.forEach((folga) => {
-          if (folga[0][0] == ul.id || folga[0][1] == ul.id) {
+          if (folga[0] == ul.id || folga[1] == ul.id) {
             const newLi = document.createElement("li");
             let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
 
@@ -264,7 +264,7 @@ const uploadToSupaBase = async (mudancas) => {
 
 const mudarEscala = async (trabalhadores) => {
   let mudancas = trabalhadores;
-
+  console.log(mudancas);
   const mudarDatas = () => {
     const feriados = [
       ["02/11", "15/11", "20/11", "25/12"],
@@ -293,12 +293,11 @@ const mudarEscala = async (trabalhadores) => {
     let ultimoDiaDoMes = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0,
+      0
     ).getDate();
     let mes = date.getMonth() + 1;
     datas.forEach((data) => {
       if (dias == ultimoDiaDoMes) {
-        console.log("ultimodia");
         dias = 1;
         mes++;
       }
@@ -334,10 +333,14 @@ const mudarEscala = async (trabalhadores) => {
   };
   const mudarFolgas = () => {
     mudancas.forEach((trabs) => {
-      if (trabs.folga == 1) {
-        trabs.folga = 7;
+      // quando a folga for cair na segunda e trabalhar no domingo vai folgar no sábado também
+
+      if (trabs.folgas.length > 1) trabs.folgas.pop();
+
+      if (trabs.folgas[0] == 1) {
+        trabs.folgas[0] = 6;
       } else {
-        trabs.folga--;
+        trabs.folgas[0]--;
       }
     });
   };
@@ -356,12 +359,12 @@ const mudarEscala = async (trabalhadores) => {
       }
     });
   };
-  mudarDatas();
+  // mudarDatas();
   mudarHorario();
   mudarFolgas();
   mudarDomingo();
   // uploadToSupaBase(mudancas);
-  // preencherEscalaPorArea(mudancas);
+  preencherEscalaPorArea(mudancas);
   // teste();
   //    await uploadToSupaBase(motoboys)
 };
