@@ -54,9 +54,9 @@ btnOk.addEventListener("click", () => {
 });
 
 btnEdit.addEventListener("click", () => {
-  // modal.showModal();
-  // modoEdit();
-  teste();
+  //modal.showModal();
+  modoEdit();
+  //teste();
 });
 
 const modoEdit = () => {
@@ -74,9 +74,17 @@ const modoEdit = () => {
         li.style.top = `${event.pageY}px`;
         li.style.transform = `translate(-50%,-50%)`;
         li.style.backgroundColor = "white";
+        divInter = document.querySelector("#divsInter");
+        divInter.addEventListener("mouseenter", () => {
+          console.log("entrou");
+          divInter.style.backgroundColor = "red";
+        });
+        divNoite = document.querySelector("mouseover",()=>{
+          divInter.style.backgroundColor = 'black'
+        })
       });
     });
-    li.addEventListener("mouseup", () => {});
+    li.addEventListener("mouseup", (event) => {});
   });
 };
 
@@ -167,7 +175,7 @@ const preencherEscalaPorArea = (area) => {
   };
 
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true"
+    (trabs) => trabs.trabDomingo[1] == "true",
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -186,7 +194,7 @@ const preencherEscalaPorArea = (area) => {
               let formatacaoLi = `<div class="flex  justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${trabs.nome}</div>`;
 
               newLi.innerHTML = formatacaoLi;
-              ul.appendChild(newLi); 
+              ul.appendChild(newLi);
             }
           }
         });
@@ -293,7 +301,7 @@ const mudarEscala = async (trabalhadores) => {
     let ultimoDiaDoMes = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0
+      0,
     ).getDate();
     let mes = date.getMonth() + 1;
     datas.forEach((data) => {
@@ -359,7 +367,7 @@ const mudarEscala = async (trabalhadores) => {
       }
     });
   };
-  // mudarDatas();
+  mudarDatas();
   mudarHorario();
   mudarFolgas();
   mudarDomingo();
