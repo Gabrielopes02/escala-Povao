@@ -4,7 +4,8 @@ Arrumar sistema de 2 folgas na semana
 esacala da perfumaria tem horário diferente
  trocar escala pra proxima semana 
 escala do balçao roda diferente:
-*fabricio e douglas abrindo na primeira quinzena do mes
+fabricio e douglas abrindo na primeira quinzena do mes
+
 */
 
 const url = "https://wbwlhifqyobcdilrwjog.supabase.co";
@@ -36,9 +37,11 @@ const btnOk = document.querySelector("#btnOk");
 const btnVoltar = document.querySelector("#btnVoltar");
 const modal = document.querySelector("#modal");
 const passWord = "senha123";
+
 btnVoltar.addEventListener("click", () => {
   modal.close();
 });
+
 btnOk.addEventListener("click", () => {
   let input = document.querySelector("#inputModal");
   let p = document.querySelector("#pModal");
@@ -55,8 +58,8 @@ btnOk.addEventListener("click", () => {
 
 btnEdit.addEventListener("click", () => {
   //modal.showModal();
-  modoEdit();
-  //teste();
+  //modoEdit();
+  teste();
 });
 
 const modoEdit = () => {
@@ -79,9 +82,9 @@ const modoEdit = () => {
           console.log("entrou");
           divInter.style.backgroundColor = "red";
         });
-        divNoite = document.querySelector("mouseover",()=>{
-          divInter.style.backgroundColor = 'black'
-        })
+        divNoite = document.querySelector("mouseover", () => {
+          divInter.style.backgroundColor = "black";
+        });
       });
     });
     li.addEventListener("mouseup", (event) => {});
@@ -174,9 +177,10 @@ const preencherEscalaPorArea = (area) => {
     return arrayFolgas;
   };
 
-  let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true",
-  );
+  let trabalhadoresDomingoAtual = area.filter((trabs) => {
+    if (trabs.trabDomingo == null) return;
+    trabs.trabDomingo[1] == "true";
+  });
 
   let folgas = retornarArrayFolgas(area);
   let trabsManha = separarPorHorario("manha");
@@ -188,6 +192,7 @@ const preencherEscalaPorArea = (area) => {
       ul.forEach((ul) => {
         ul.innerHTML = "";
         trabalhadores.forEach((trabs) => {
+          if (trabs.folgas == null) return;
           if (trabs.folgas[0] != ul.id) {
             if (trabs.folgas[1] != ul.id) {
               const newLi = document.createElement("li");
@@ -244,11 +249,48 @@ const preencherEscalaPorArea = (area) => {
 }; // funcao que faz varias coisas (mudar isso e o nome dela)
 
 const teste = async () => {
-  motoboys.forEach((trabs) => {
-    trabs.folgas = trabs.folga;
-  });
-  //  await uploadToSupaBase(motoboys);
+
+
 };
+
+const folgasPerfumaria = [
+  {
+    nome: "Fabiano",
+    folgas: [1],
+  },
+  {
+    nome: "Eloana",
+    folgas: [1],
+  },
+  {
+    nome: "Mariana",
+    folgas: [2],
+  },
+  {
+    nome: "Adriana",
+    folgas: [2],
+  },
+  {
+    nome: "Erica",
+    folgas: [3],
+  },
+  {
+    nome: "Adriana P",
+    folgas: [3],
+  },
+  {
+    nome: "Mel",
+    folgas: [4],
+  },
+  {
+    nome: "Eloah",
+    folgas: [5],
+  },
+  {
+    nome: "Grazi",
+    folgas: [6],
+  },
+];
 
 const uploadToSupaBase = async (mudancas) => {
   const { data, error } = await dbSupabase
@@ -257,18 +299,6 @@ const uploadToSupaBase = async (mudancas) => {
     .select();
   console.log(data, error);
 };
-
-// const objTeste = [
-//   {
-//     horario: "noite",
-//     cargo: "motoboy",
-//     folga: [2],
-//     id: 14,
-//     nome: "Caldeira",
-//     trabDomingo: ["noite", "false"],
-//     trabFeriado: null,
-//   },
-// ];
 
 const mudarEscala = async (trabalhadores) => {
   let mudancas = trabalhadores;
