@@ -8,4 +8,26 @@
 <body>
     
 </body>
+<div id="caixa" draggable="true">Arraste-me</div>
+<div id="alvo" style="width: 200px; height: 200px; border: 2px dashed #ccc;">Solte aqui</div>
+
+<script>
+  const caixa = document.getElementById('caixa');
+  const alvo = document.getElementById('alvo');
+
+  caixa.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', e.target.id);
+  });
+
+  alvo.addEventListener('dragover', (e) => {
+    e.preventDefault(); // Permite soltar o elemento
+  });
+
+  alvo.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain');
+    const elemento = document.getElementById(id);
+    alvo.appendChild(elemento);
+  });
+</script>
 </html>

@@ -60,32 +60,33 @@ btnEdit.addEventListener("click", () => {
 });
 
 const modoEdit = () => {
-  const liDivsManha = document
-    .querySelector("#divsManha")
-    .querySelectorAll("li");
+  const divsManha = document.querySelector("#divsManha");
+  const liDivsManha = divsManha.querySelectorAll("li");
 
-  liDivsManha.forEach((li) => {
-    li.classList.add("modeEdit");
+  const divsNoite = document.querySelector("#divsNoite");
+  const liDivsNoite = divsNoite.querySelectorAll("li");
 
-    li.addEventListener("mousedown", () => {
-      window.addEventListener("mousemove", (event) => {
-        li.style.position = "absolute";
-        li.style.left = `${event.pageX}px`;
-        li.style.top = `${event.pageY}px`;
-        li.style.transform = `translate(-50%,-50%)`;
-        li.style.backgroundColor = "white";
-        divInter = document.querySelector("#divsInter");
-        divInter.addEventListener("mouseenter", () => {
-          console.log("entrou");
-          divInter.style.backgroundColor = "red";
-        });
-        divNoite = document.querySelector("mouseover",()=>{
-          divInter.style.backgroundColor = 'black'
-        })
-      });
-    });
-    li.addEventListener("mouseup", (event) => {});
+  const divsTarde = document.querySelector("#divsInter");
+  const liDivsTarde = divsTarde.querySelectorAll("li");
+
+  liDivsTarde.forEach((li) => {
+    li.classList.add("modeEdit", "bg-white");
+    li.draggable = "true";
   });
+
+  liDivsTarde.addEventListener("dragstart", (event) =>
+    event.dataTransfer.setData("text/plain", event.target.id)
+  );
+
+  // liDivsManha.forEach((li) => {
+  //   li.classList.add("modeEdit", "bg-white");
+  //   li.draggable = "true";
+  // });
+
+  // liDivsNoite.forEach((li) => {
+  //   li.classList.add("modeEdit", "bg-white");
+  //   li.draggable = "true";
+  // });
 };
 
 botoesNav.forEach((btn) => {
@@ -175,7 +176,7 @@ const preencherEscalaPorArea = (area) => {
   };
 
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true",
+    (trabs) => trabs.trabDomingo[1] == "true"
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -301,7 +302,7 @@ const mudarEscala = async (trabalhadores) => {
     let ultimoDiaDoMes = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0,
+      0
     ).getDate();
     let mes = date.getMonth() + 1;
     datas.forEach((data) => {
