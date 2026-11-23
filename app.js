@@ -13,8 +13,15 @@ const key =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid2xoaWZxeW9iY2RpbHJ3am9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNDQxNDQsImV4cCI6MjA5ODkyMDE0NH0.3fIMSgxi9eSAf6TPzcCKca243I49gRWJcnpm95GCojY";
 
 const dbSupabase = supabase.createClient(url, key);
-
-let trabalhadores = "";
+let trabalhadores = [{
+  cargo: "motoboy",
+  folgas: [5],
+  horario: "manha",
+  id: 14,
+  nome: "Caldeira",
+  trabDomingo: ["manhã", "false"],
+}];
+// let trabalhadores = ""
 let motoboys = [];
 let caixas = [];
 let separadores = [];
@@ -58,8 +65,8 @@ btnOk.addEventListener("click", () => {
 
 btnEdit.addEventListener("click", () => {
   //modal.showModal();
-  //modoEdit();
-  teste();
+  modoEdit();
+  // teste();
 });
 
 const modoEdit = () => {
@@ -132,7 +139,7 @@ const buscarTrabalhadores = async () => {
 }; // funcao de consumir o banco
 
 window.onload = async () => {
-  trabalhadores = await buscarTrabalhadores();
+  // trabalhadores = await buscarTrabalhadores();
   separacaoDeCargo();
   preencherEscalaPorArea(motoboys);
 }; //função para consumir o banco supabase assim que carregar a pagina
@@ -177,16 +184,14 @@ const preencherEscalaPorArea = (area) => {
     return arrayFolgas;
   };
 
-  let trabalhadoresDomingoAtual = area.filter((trabs) => {
-    if (trabs.trabDomingo == null) return;
-    trabs.trabDomingo[1] == "true";
-  });
+  let trabalhadoresDomingoAtual = area.filter(
+    (trabs) => trabs.trabDomingo[1] == "true",
+  );
 
   let folgas = retornarArrayFolgas(area);
   let trabsManha = separarPorHorario("manha");
   let trabsNoite = separarPorHorario("noite");
   let trabsIntermedio = separarPorHorario("inter");
-
   const preencherEscala = (area) => {
     const preencherUls = (ul, trabalhadores) => {
       ul.forEach((ul) => {
@@ -208,15 +213,25 @@ const preencherEscalaPorArea = (area) => {
     const preencherFolga = () => {
       ulFolgas.forEach((ul) => {
         ul.innerHTML = "";
-        folgas.forEach((folga) => {
-          if (folga[0] == ul.id || folga[1] == ul.id) {
-            const newLi = document.createElement("li");
-            let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
+        folgas.forEach((dias) => {
+          if (dias[0] == null) return;
+          dias[0].forEach((folga) => {
+            if (folga == ul.id) {
+              const newLi = document.createElement("li");
+              let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${dias[1]}</div>`;
 
-            newLi.innerHTML = formatacaoLi;
-            ul.appendChild(newLi);
-          }
+              newLi.innerHTML = formatacaoLi;
+              ul.appendChild(newLi);
+            }
+          });
         });
+        // if (folga[0] == ul.id) {
+        //   const newLi = document.createElement("li");
+        //   let formatacaoLi = `<div class="flex justify-start px-1 gap-2 items-center border-2 border-blue-0 rounded whitespace-nowrap"><i class="fa-solid fa-user text-blue-700"></i>${folga[1]}</div>`;
+
+        //   newLi.innerHTML = formatacaoLi;
+        //   ul.appendChild(newLi);
+        // }
       });
     };
     const preencherDomingo = () => {
@@ -248,10 +263,7 @@ const preencherEscalaPorArea = (area) => {
   preencherEscala(area);
 }; // funcao que faz varias coisas (mudar isso e o nome dela)
 
-const teste = async () => {
-
-
-};
+const teste = async () => {};
 
 const folgasPerfumaria = [
   {
