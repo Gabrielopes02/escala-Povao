@@ -88,6 +88,20 @@ const modoEdit = () => {
       console.log("comecou a arrastar", event),
     );
   });
+
+  liDivsTarde.addEventListener("dragstart", (event) =>
+    event.dataTransfer.setData("text/plain", event.target.id)
+  );
+
+  // liDivsManha.forEach((li) => {
+  //   li.classList.add("modeEdit", "bg-white");
+  //   li.draggable = "true";
+  // });
+
+  // liDivsNoite.forEach((li) => {
+  //   li.classList.add("modeEdit", "bg-white");
+  //   li.draggable = "true";
+  // });
 };
 
 botoesNav.forEach((btn) => {
@@ -177,7 +191,7 @@ const preencherEscalaPorArea = (area) => {
   };
 
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true",
+    (trabs) => trabs.trabDomingo[1] == "true"
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -335,7 +349,7 @@ const mudarEscala = async (trabalhadores) => {
     let ultimoDiaDoMes = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0,
+      0
     ).getDate();
     let mes = date.getMonth() + 1;
     datas.forEach((data) => {
