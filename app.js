@@ -13,14 +13,16 @@ const key =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid2xoaWZxeW9iY2RpbHJ3am9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNDQxNDQsImV4cCI6MjA5ODkyMDE0NH0.3fIMSgxi9eSAf6TPzcCKca243I49gRWJcnpm95GCojY";
 
 const dbSupabase = supabase.createClient(url, key);
-let trabalhadores = [{
-  cargo: "motoboy",
-  folgas: [5],
-  horario: "manha",
-  id: 14,
-  nome: "Caldeira",
-  trabDomingo: ["manhã", "false"],
-}];
+let trabalhadores = [
+  {
+    cargo: "motoboy",
+    folgas: [5],
+    horario: "manha",
+    id: 14,
+    nome: "Caldeira",
+    trabDomingo: ["manhã", "false"],
+  },
+];
 // let trabalhadores = ""
 let motoboys = [];
 let caixas = [];
@@ -73,28 +75,18 @@ const modoEdit = () => {
   const liDivsManha = document
     .querySelector("#divsManha")
     .querySelectorAll("li");
+    
+  const divTarde = document.queryselector("#divsTarde");
+  const divManha = document.queryselector("#divsManha");
+
+
 
   liDivsManha.forEach((li) => {
     li.classList.add("modeEdit");
-
-    li.addEventListener("mousedown", () => {
-      window.addEventListener("mousemove", (event) => {
-        li.style.position = "absolute";
-        li.style.left = `${event.pageX}px`;
-        li.style.top = `${event.pageY}px`;
-        li.style.transform = `translate(-50%,-50%)`;
-        li.style.backgroundColor = "white";
-        divInter = document.querySelector("#divsInter");
-        divInter.addEventListener("mouseenter", () => {
-          console.log("entrou");
-          divInter.style.backgroundColor = "red";
-        });
-        divNoite = document.querySelector("mouseover", () => {
-          divInter.style.backgroundColor = "black";
-        });
-      });
-    });
-    li.addEventListener("mouseup", (event) => {});
+    li.draggable = "true";
+    li.addEventListener("dragstart", (event) =>
+      console.log("comecou a arrastar", event),
+    );
   });
 };
 
