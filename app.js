@@ -22,6 +22,22 @@ let trabalhadores = [
     nome: "Caldeira",
     trabDomingo: ["manhã", "false"],
   },
+  {
+    cargo: "motoboy",
+    folgas: [4],
+    horario: "inter",
+    id: 14,
+    nome: "pablo",
+    trabDomingo: ["manhã", "false"],
+  },
+  {
+    cargo: "motoboy",
+    folgas: [3],
+    horario: "noite",
+    id: 14,
+    nome: "paloma",
+    trabDomingo: ["manhã", "false"],
+  },
 ];
 // let trabalhadores = ""
 let motoboys = [];
@@ -75,33 +91,60 @@ const modoEdit = () => {
   const liDivsManha = document
     .querySelector("#divsManha")
     .querySelectorAll("li");
+  const liDivsInter = document
+    .querySelector("#divsInter")
+    .querySelectorAll("li");
+  const liDivsNoite = document
+    .querySelector("#divsNoite")
+    .querySelectorAll("li");
+
+  const divTarde = document.querySelector("#divsInter");
+  const divManha = document.querySelector("#divsManha");
+  let divMudanca = "";
+  const dragStart = (liStart) => {
+    liStart.forEach((li) => {
+      li.classList.add("modeEdit");
+      li.draggable = "true";
+      li.addEventListener("dragstart", (event) => {
+        console.log("comecou a arrastar", li);
+        divMudanca = li;
+      });
+    });
+  };
+  dragStart(liDivsManha);
+  dragStart(liDivsInter);
+  dragStart(liDivsNoite);
+  console.log(divMudanca)
+  const dragOverAndDrop = (div, horario) => {
+    div.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      console.log("dragover em ", horario);
+    });
+    div.addEventListener("drop", (event) => {
+      event.preventDefault();
+      console.log("drop ", horario);
     
-  const divTarde = document.queryselector("#divsTarde");
-  const divManha = document.queryselector("#divsManha");
-
-
-
-  liDivsManha.forEach((li) => {
-    li.classList.add("modeEdit");
-    li.draggable = "true";
-    li.addEventListener("dragstart", (event) =>
-      console.log("comecou a arrastar", event),
-    );
-  });
-
-  liDivsTarde.addEventListener("dragstart", (event) =>
-    event.dataTransfer.setData("text/plain", event.target.id)
-  );
-
-  // liDivsManha.forEach((li) => {
-  //   li.classList.add("modeEdit", "bg-white");
-  //   li.draggable = "true";
+      let trabMudar = trabalhadores.find((trab) => trab.nome == divMudanca.textContent);
+       trabMudar.horario = horario
+      preencherEscalaPorArea(motoboys);
+    });
+  };
+  dragOverAndDrop(divTarde, "inter");
+  dragOverAndDrop(divManha,"manha")
+  // divTarde.addEventListener("dragover", (event) => {
+  //   event.preventDefault();
+  //   console.log("dragover em divTarde");
   // });
-
-  // liDivsNoite.forEach((li) => {
-  //   li.classList.add("modeEdit", "bg-white");
-  //   li.draggable = "true";
-  // });
+  //   divTarde.addEventListener("drop", (event) => {
+  //     event.preventDefault();
+  //     console.log("drop aconteceu em divTarde");
+  //     let trabMudar = trabalhadores.find(
+  //       (trab) => trab.nome == liDivsManha[0].textContent,
+  //     );
+  //     // console.log(trabMudar);
+  //     trabMudar.horario = "inter";
+  //     preencherEscalaPorArea(motoboys);
+  //   });
 };
 
 botoesNav.forEach((btn) => {
@@ -191,7 +234,7 @@ const preencherEscalaPorArea = (area) => {
   };
 
   let trabalhadoresDomingoAtual = area.filter(
-    (trabs) => trabs.trabDomingo[1] == "true"
+    (trabs) => trabs.trabDomingo[1] == "true",
   );
 
   let folgas = retornarArrayFolgas(area);
@@ -349,7 +392,7 @@ const mudarEscala = async (trabalhadores) => {
     let ultimoDiaDoMes = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0
+      0,
     ).getDate();
     let mes = date.getMonth() + 1;
     datas.forEach((data) => {
